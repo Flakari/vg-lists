@@ -5,3 +5,19 @@
 img {
   width: 50%;
 }
+
+#search-results li {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 30%;
+  padding: 10px 20px;
+  list-style-type: none;
+  background-color: lightgray;
+  border-radius: 5px;
+}
+
+#search-results h2 {
+  font-size: 1.2em;
+  text-align: left;
+  margin: 0;
+}
