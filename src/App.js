@@ -1,15 +1,27 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [input, setInput] = useState('');
   const [data, setData] = useState('');
   const [dataDisplay, setDataDisplay] = useState([]);
 
   useEffect(() => {
-    fetch("https://api.rawg.io/api/games?search=katamari-damacy", {
+    setDataDisplay([...data].map(item => (
+      <li key={item.id}>{item.name}</li>
+    )));
+  }, [data])
+
+  const inputChangeHandler = (input) => {
+    setInput(input.target.value);
+  }
+
+  const searchSubmitHandler = () => {
+    console.log(input.split(' ').join('-'))
+    fetch(`https://api.rawg.io/api/games?search=${input.split(' ').join('-')}`, {
 	    "method": "GET",
 	    "headers": {
-		    "User-Agent": "personal-project-vg-lists"
+		    "User-Agent": "https://github.com/Flakari/vg-lists/"
 	    }
     })
     .then(response => {
@@ -25,19 +37,18 @@ function App() {
     .catch(err => {
 	    console.log(err);
     });
-  }, []);
-
-  useEffect(() => {
-    setDataDisplay([...data].map(item => (
-      <li key={item.id}>{item.name}</li>
-    )));
-  }, [data])
+  }
 
   return (
     <div className="App">
+      <form onSubmit={e => { e.preventDefault(); searchSubmitHandler() }}>
+        <input type="text" onChange={inputChangeHandler} value={input}/>
+        <input type="submit" value="Submit" />
+      </form>
       <ul>
         {dataDisplay}
       </ul>
+      <footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>
     </div>
   );
 }
