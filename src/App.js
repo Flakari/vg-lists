@@ -4,10 +4,19 @@ import ListItem from './ListItem/ListItem';
 
 function App() {
   const [input, setInput] = useState('');
+  const [inputDisplay, setInputDisplay] = useState('');
   const [data, setData] = useState('');
   const [dataDisplay, setDataDisplay] = useState([]);
-  const [testList, setTestList] = useState([]);
-  const [otherList, setOtherList] = useState([]);
+  const [lists, setLists] = useState([
+    {
+      name: 'Test',
+      contents: []
+    }, 
+    {
+      name: 'Other',
+      contents: []
+    }
+  ]);
 
   useEffect(() => {
     setDataDisplay([...data].map(item => (
@@ -15,26 +24,30 @@ function App() {
         key={item.id} 
         name={item.name} 
         add={addGameToList} 
-        list={["testList", "otherList"]}
+        list={lists}
       />
     )));
-  }, [data]);
+    
+  }, [data, lists]);
 
   useEffect(() => {
-    console.log(testList);
-    console.log(otherList);
-  }, [testList, otherList]);
+    console.table(lists[0].name, lists[0].contents);
+    console.table(lists[1].name, lists[1].contents)
+  }, [lists]);
 
   const inputChangeHandler = (input) => {
     setInput(input.target.value);
   }
 
-  const addGameToList = (game, list) => {
-    if (list === 'testList') {
-      setTestList(testList => [...testList, game]);
-    } else if (list === 'otherList') {
-      setOtherList(otherList => [...otherList, game]);
+  const addGameToList = (lists, game, listName) => {
+    const newLists = [...lists];
+    for (let i = 0; i < newLists.length; i++) {
+      if (newLists[i].name === listName) {
+        newLists[i].contents.push(game);
+      }
     }
+
+    setLists(newLists);
   }
 
   const searchSubmitHandler = () => {
@@ -62,13 +75,14 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={e => { e.preventDefault(); searchSubmitHandler() }}>
+      <form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); setInputDisplay(input); }}>
         <input type="text" onChange={inputChangeHandler} value={input}/>
         <input type="submit" value="Submit" />
       </form>
-      {dataDisplay.length === 0 ? null : (<ul id="search-results">
+      {dataDisplay.length === 0 ? null : (<><h1>Results for {inputDisplay}...</h1>
+      <ul id="search-results">
         {dataDisplay}
-      </ul>)}
+      </ul></>)}
       <footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>
     </div>
   );
