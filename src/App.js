@@ -31,8 +31,9 @@ const App = () => {
   	}, [data, lists]);
 
 	useEffect(() => {
-		console.table(lists[0].name, lists[0].contents);
-		console.table(lists[1].name, lists[1].contents);
+		for (let i = 0; i < lists.length; i++) {
+			console.table(lists[i].name, lists[i].contents);
+		}
 	}, [lists]);
 
 	const inputChangeHandler = (input) => {
@@ -43,12 +44,23 @@ const App = () => {
 		const newLists = [...lists];
 		for (let i = 0; i < newLists.length; i++) {
 			if (newLists[i].name === listName) {
-				newLists[i].contents.push(game);
+				if (newLists[i].contents.indexOf(game) === -1) {
+					newLists[i].contents.push(game);
+				}
 			}
 		}
-
+		
 		setLists(newLists);
 	}
+
+	const addNewList = (name) => {
+		const newLists = [...lists];
+		newLists.push({
+			name: name,
+			contents: []
+		});
+		setLists(newLists);
+	};
 
 	const searchSubmitHandler = () => {
 		console.log(input.split(' ').join('-'))
@@ -76,7 +88,7 @@ const App = () => {
   	return (
     	<div className="App">
       		<header></header>
-      		<Sidebar />
+      		<Sidebar lists={lists} add={addNewList}/>
 			<div id="main-container">
 				<form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); setInputDisplay(input); }}>
 					<input type="text" onChange={inputChangeHandler} value={input} />
