@@ -15,8 +15,24 @@ img {
   position: fixed;
 }
 
+#sidebar ul {
+  padding: 0;
+}
+
+#sidebar li {
+  list-style-type: none;
+}
+
+#sidebar a {
+  color: white;
+}
+
 #main-container {
   margin-left: 200px;
+}
+
+#search-results {
+  padding: 0;
 }
 
 #search-results li {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 const Sidebar = (props) => {
     const [inputValue, setInputValue] = useState('');
@@ -15,13 +16,18 @@ const Sidebar = (props) => {
 
     useEffect(() => {
         setNavigation(props.lists.map(item => {
-            return <li key={item.name}>{item.name}</li>
-        }))
+            const linkName = item.name.toLowerCase().split(' ').join('-');
+            return (
+                <li key={item.name}>
+                    <Link to={`/${linkName}`}>{item.name}</Link>
+                </li>
+            );
+        }));
     }, [props.lists]);
 
     const input = (
         <form onSubmit={e => { e.preventDefault(); props.add(inputValue); setInputVisible(false); setInputValue('')}}>
-            <input type="text" value={inputValue} onChange={inputChangeHandler}></input>
+            <input id="list-input" type="text" value={inputValue} onChange={inputChangeHandler} autoFocus></input>
             <input type="submit" value="Submit"></input>
         </form>
     );
@@ -31,9 +37,11 @@ const Sidebar = (props) => {
             <button onClick={buttonClickHandler}>{inputVisible ? 'Cancel' : 'Add List'}</button>
             {inputVisible ? input : null}
             <nav>
-                <ul>
-                    {navigation}
-                </ul>
+                <Router>
+                    <ul>
+                        {navigation}
+                    </ul>
+                </Router>
             </nav>
         </div>
     )
