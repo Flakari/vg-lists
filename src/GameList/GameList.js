@@ -12,8 +12,8 @@ const GameList = (props) => {
             return <ListItem 
                 key={item}
                 name={item}
-                add={props.add}
                 list={props.lists}
+                type="game"
             />
         }));
     }

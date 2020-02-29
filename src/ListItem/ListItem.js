@@ -17,10 +17,11 @@ const ListItem = props => {
     return (
         <li>
             <h2>{props.name}</h2>
-            <select onChange={onChangeHandler}>
+            {props.type === 'search' ? (<><select onChange={onChangeHandler}>
                 {options}
             </select>
-            <button onClick={() => props.add(props.list, props.name, selection || props.list[0].name)}>Add</button>
+            <button onClick={() => props.add(props.list, props.name, selection || props.list[0].name)}>Add</button></>)
+            : null}
         </li>
     )
 }
