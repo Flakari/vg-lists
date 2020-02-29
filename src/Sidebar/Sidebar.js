@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Sidebar = (props) => {
     const [inputValue, setInputValue] = useState('');
@@ -16,7 +16,7 @@ const Sidebar = (props) => {
 
     useEffect(() => {
         setNavigation(props.lists.map(item => {
-            const linkName = item.name.toLowerCase().split(' ').join('-');
+            const linkName = item.linkRoute;
             return (
                 <li key={item.name}>
                     <Link to={`/${linkName}`}>{item.name}</Link>
@@ -34,14 +34,13 @@ const Sidebar = (props) => {
 
     return (
         <div id="sidebar">
+            <Link to={'/'}>Search</Link>
             <button onClick={buttonClickHandler}>{inputVisible ? 'Cancel' : 'Add List'}</button>
             {inputVisible ? input : null}
             <nav>
-                <Router>
-                    <ul>
-                        {navigation}
-                    </ul>
-                </Router>
+                <ul>
+                    {navigation}
+                </ul>
             </nav>
         </div>
     )

@@ -29,13 +29,18 @@ img {
 
 #main-container {
   margin-left: 200px;
+  padding-top: 15px;
 }
 
-#search-results {
+#main-container h1 {
+  margin-top: 0;
+}
+
+#search-results, #game-list {
   padding: 0;
 }
 
-#search-results li {
+#search-results li, #game-list li {
   margin: 0 auto;
   margin-bottom: 10px;
   width: 30%;
@@ -45,7 +50,7 @@ img {
   border-radius: 5px;
 }
 
-#search-results h2 {
+#search-results h2, #game-list h2 {
   font-size: 1.2em;
   text-align: left;
   margin: 0;

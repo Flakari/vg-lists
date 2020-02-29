@@ -52,20 +52,20 @@ const SearchResults = (props) => {
 	}
 
     return (
-        <div id="main-container">
-				<form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); setInputDisplay(input.trim()); }}>
-					<input type="text" onChange={inputChangeHandler} value={input} />
-					<input type="submit" value="Submit" />
-				</form>
-				{dataDisplay.length === 0 ? null : (
-					<>
-						<h1>Results for {inputDisplay}...</h1>
-						<ul id="search-results">
-						{dataDisplay}
-						</ul>
-					</>)}
-				<footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>
-			</div>
+        <>
+            <form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); setInputDisplay(input.trim()); }}>
+                <input type="text" onChange={inputChangeHandler} value={input} />
+                <input type="submit" value="Submit" />
+            </form>
+            {dataDisplay.length === 0 ? null : (
+                <>
+                    <h1>Results for {inputDisplay}...</h1>
+                    <ul id="search-results">
+                    {dataDisplay}
+                    </ul>
+                </>)}
+            <footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>
+        </>
     );
 };
 

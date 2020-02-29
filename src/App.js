@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Sidebar from './Sidebar/Sidebar';
 import SearchResults from './SearchResults/SearchResults';
+import GameList from './GameList/GameList';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
   	const [lists, setLists] = useState([
 		{
 			name: 'Test',
+			linkRoute: 'test',
 			contents: []
 		},
 		{
 			name: 'Other',
+			linkRoute: 'other',
 			contents: []
 		}
   	]);
@@ -31,6 +35,7 @@ const App = () => {
 		const newLists = [...lists];
 		newLists.push({
 			name: name.trim(),
+			linkRoute: name.toLowerCase().split(' ').join('-'),
 			contents: []
 		});
 		setLists(newLists);
@@ -38,9 +43,19 @@ const App = () => {
 
   	return (
     	<div className="App">
-      		<header></header>
-      		<Sidebar lists={lists} add={addNewList}/>
-			<SearchResults lists={lists} add={addGameToList}/>
+			<Router>
+				<header></header>
+				<Sidebar lists={lists} add={addNewList}/>
+				<div id="main-container">
+					<Switch>
+						<Route exact path="/">
+							<SearchResults lists={lists} add={addGameToList}/>
+						</Route>
+						<Route path="/:name" render={(props) => <GameList lists={lists} {...props} />} />
+					</Switch>
+				</div>
+			</Router>
+      		
     	</div>
   );
 };
