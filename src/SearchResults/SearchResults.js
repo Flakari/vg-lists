@@ -4,11 +4,10 @@ import ListItem from '../ListItem/ListItem';
 const SearchResults = (props) => {
     const [dataDisplay, setDataDisplay] = useState([]);
     const [input, setInput] = useState('');
-  	const [inputDisplay, setInputDisplay] = useState('');
-  	const [data, setData] = useState('');
+  	const [inputDisplay, setInputDisplay] = useState(props.searchInput || '');
     
     useEffect(() => {
-		setDataDisplay([...data].map(item => (
+		setDataDisplay([...props.data].map(item => (
       		<ListItem
 				key={item.id}
 				name={item.name}
@@ -17,7 +16,7 @@ const SearchResults = (props) => {
                 type="search"
 			/>
     	)));
-    }, [data, props.lists, props.add]);
+    }, [props.data, props.lists, props.add]);
       
     const searchSubmitHandler = async () => {
 		console.log(input.split(' ').join('-'));
@@ -35,7 +34,7 @@ const SearchResults = (props) => {
 		})
 		.then(response => {
 			console.log(response.results);
-			setData(response.results);
+			props.setData(response.results);
 		})
 		.catch(err => {
 			console.log(err);
@@ -54,7 +53,7 @@ const SearchResults = (props) => {
 
     return (
         <>
-            <form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); setInputDisplay(input.trim()); }}>
+            <form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); setInputDisplay(input.trim()); props.setInput(input.trim()) }}>
                 <input type="text" onChange={inputChangeHandler} value={input} />
                 <input type="submit" value="Submit" />
             </form>

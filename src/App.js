@@ -6,6 +6,8 @@ import GameList from './GameList/GameList';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
+	const [searchData, setSearchData] = useState('');
+	const [searchInput, setSearchInput] = useState('');
   	const [lists, setLists] = useState([
 		{
 			name: 'Test',
@@ -19,13 +21,19 @@ const App = () => {
 		}
   	]);
 
+	const setData = (data) => {
+    	setSearchData(data);
+    }
+
+	const setInput = (input) => {
+		setSearchInput(input);
+	}
+
 	const addGameToList = (lists, game, listName) => {
 		const newLists = [...lists];
 		for (let i = 0; i < newLists.length; i++) {
-			if (newLists[i].name === listName) {
-				if (newLists[i].contents.indexOf(game) === -1) {
-					newLists[i].contents.push(game);
-				}
+			if (newLists[i].name === listName && newLists[i].contents.indexOf(game) === -1) {
+				newLists[i].contents.push(game);
 			}
 		}
 		setLists(newLists);
@@ -49,7 +57,14 @@ const App = () => {
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">
-							<SearchResults lists={lists} add={addGameToList}/>
+							<SearchResults 
+								lists={lists} 
+								add={addGameToList} 
+								data={searchData} 
+								setData={setData}
+								searchInput={searchInput}
+								setInput={setInput}
+							/>
 						</Route>
 						<Route path="/:name" render={(props) => <GameList lists={lists} {...props} />} />
 					</Switch>
