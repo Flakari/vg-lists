@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ListItem from '../ListItem/ListItem';
+import SearchResult from '../SearchResult/SearchResult';
 
 const SearchResults = (props) => {
     const [dataDisplay, setDataDisplay] = useState([]);
     const [input, setInput] = useState('');
-  	const [inputDisplay, setInputDisplay] = useState(props.searchInput || '');
     
     useEffect(() => {
 		setDataDisplay([...props.data].map(item => (
-      		<ListItem
+      		<SearchResult
 				key={item.id}
 				name={item.name}
 				add={props.add}
                 list={props.lists}
-                type="search"
 			/>
     	)));
     }, [props.data, props.lists, props.add]);
@@ -53,13 +52,13 @@ const SearchResults = (props) => {
 
     return (
         <>
-            <form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); setInputDisplay(input.trim()); props.setInput(input.trim()) }}>
+            <form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); props.setInput(input.trim()) }}>
                 <input type="text" onChange={inputChangeHandler} value={input} />
                 <input type="submit" value="Submit" />
             </form>
             {dataDisplay.length === 0 ? null : (
                 <>
-                    <h1>Results for {inputDisplay}...</h1>
+                    <h1>Results for {props.searchInput}...</h1>
                     <ul id="search-results">
                     {dataDisplay}
                     </ul>

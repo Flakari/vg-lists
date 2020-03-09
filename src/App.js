@@ -30,14 +30,39 @@ const App = () => {
 	}
 
 	const addGameToList = (lists, game, listName) => {
+		
 		const newLists = [...lists];
 		for (let i = 0; i < newLists.length; i++) {
-			if (newLists[i].name === listName && newLists[i].contents.indexOf(game) === -1) {
-				newLists[i].contents.push(game);
-			}
+			console.log([listName, newLists[i].name]);
+			if (newLists[i].name === listName) {
+				const gameList = [];
+				newLists[i].contents.forEach(item => {
+					gameList.push(item.name);
+				});
+
+				if (gameList.indexOf(game) === -1) {
+					newLists[i].contents.push({name: game, index: newLists[i].contents.length});
+					setLists(newLists);
+				}
+			} 
 		}
-		setLists(newLists);
 	}
+
+	const deleteGameFromList = (lists, list, index) => {
+		let listIndex = 0;
+		let newList = JSON.parse(JSON.stringify([...lists]));
+		let changedList = newList.filter((item, index) => {
+			if (item.name === list) listIndex = index;
+            return item.name === list;
+		})[0];
+		console.log(listIndex);
+		changedList.contents.splice(index, 1);
+		for (let i = 0; i < changedList.contents.length; i++) {
+			changedList.contents[i]['index'] = i;
+		}
+		newList[listIndex].contents = changedList.contents;
+		setLists(newList);
+    }
 
 	const addNewList = (name) => {
 		const newLists = [...lists];
@@ -66,7 +91,7 @@ const App = () => {
 								setInput={setInput}
 							/>
 						</Route>
-						<Route path="/:name" render={(props) => <GameList lists={lists} {...props} />} />
+						<Route path="/:name" render={(props) => <GameList deleteItem={deleteGameFromList} lists={lists} {...props} />} />
 					</Switch>
 				</div>
 			</Router>

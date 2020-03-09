@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ListItem from '../ListItem/ListItem'
+import GameListItem from '../GameListItem/GameListItem';
 
 const GameList = (props) => {
     const [data, setData] = useState(props.lists.filter(item => {
@@ -9,11 +10,13 @@ const GameList = (props) => {
     
     const createList = () => {
         setListDisplay([...data.contents].map(item => {
-            return <ListItem 
-                key={item}
-                name={item}
-                list={props.lists}
-                type="game"
+            return <GameListItem 
+                key={item.name}
+                name={item.name}
+                index={item.index}
+                lists={props.lists}
+                gameList={data.name}
+                deleteItem={props.deleteItem}
             />
         }));
     }
