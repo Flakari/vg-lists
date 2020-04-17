@@ -19,7 +19,7 @@ const Sidebar = (props) => {
             const linkName = item.linkRoute;
             return (
                 <li key={item.name}>
-                    <Link to={`/${linkName}`}>{item.name}</Link>
+                    <Link to={`/${linkName}`}>{`${item.name} [${item.contents.length}]`}</Link>
                 </li>
             );
         }));

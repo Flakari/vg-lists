@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ListItem from '../ListItem/ListItem';
 import SearchResult from '../SearchResult/SearchResult';
 
 const SearchResults = (props) => {

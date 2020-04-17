@@ -1,38 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import ListItem from '../ListItem/ListItem'
 import GameListItem from '../GameListItem/GameListItem';
 
 const GameList = (props) => {
     const [data, setData] = useState(props.lists.filter(item => {
         return item.linkRoute === props.match.params.name;
     })[0]);
-    const [listDisplay, setListDisplay] = useState([]);
-    
-    const createList = () => {
-        setListDisplay([...data.contents].map(item => {
-            return <GameListItem 
-                key={item.name}
-                name={item.name}
-                index={item.index}
-                lists={props.lists}
-                gameList={data.name}
-                deleteItem={props.deleteItem}
-            />
-        }));
-    }
 
     useEffect(() => {
         console.log(props.match);
         setData(props.lists.filter(item => {
             return item.linkRoute === props.match.params.name;
         })[0]);
-        createList();
-    }, [props.match, data.contents]);
-
-    useEffect(() => {
-        console.log(props.match);
-        console.log(props);
-    }, []);
+    }, [props.match, props.lists]);
 
     useEffect(() => {
         console.log(data);
@@ -42,7 +21,18 @@ const GameList = (props) => {
         <div>
             <h1>{data.name}</h1>
             <ul id="game-list">
-                {listDisplay}
+                {[...data.contents].map(item => {
+                    return <GameListItem 
+                        key={item.name}
+                        name={item.name}
+                        index={item.index}
+                        lists={props.lists}
+                        gameList={data.name}
+                        changeItem={props.changeItem}
+                        deleteItem={props.deleteItem}
+                        moveItem={props.moveItem}
+                    />
+                })}
             </ul>
         </div>
     );

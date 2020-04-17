@@ -30,8 +30,7 @@ const App = () => {
 	}
 
 	const addGameToList = (lists, game, listName) => {
-		
-		const newLists = [...lists];
+		const newLists = JSON.parse(JSON.stringify([...lists]));
 		for (let i = 0; i < newLists.length; i++) {
 			console.log([listName, newLists[i].name]);
 			if (newLists[i].name === listName) {
@@ -48,21 +47,44 @@ const App = () => {
 		}
 	}
 
-	const deleteGameFromList = (lists, list, index) => {
-		let listIndex = 0;
+	const changeGameListItem = (command, lists, list, index) => {
+		let listIndex;
 		let newList = JSON.parse(JSON.stringify([...lists]));
-		let changedList = newList.filter((item, index) => {
+
+		// Filters list being worked on
+		let filteredList = newList.filter((item, index) => {
 			if (item.name === list) listIndex = index;
             return item.name === list;
 		})[0];
-		console.log(listIndex);
-		changedList.contents.splice(index, 1);
-		for (let i = 0; i < changedList.contents.length; i++) {
-			changedList.contents[i]['index'] = i;
+
+		// Grabs list item based on index value
+		const changingItem = filteredList.contents.splice(index, 1)[0];
+		console.log(changingItem);
+
+		// Runs function based on command
+		if (command === 'up' || command === 'down') {
+			let newList = moveListItem(command, filteredList.contents, changingItem, index);
+			filteredList.contents = newList;
 		}
-		newList[listIndex].contents = changedList.contents;
+
+		// Resets index values of game list
+		for (let i = 0; i < filteredList.contents.length; i++) {
+			filteredList.contents[i]['index'] = i;
+		}
+		newList[listIndex].contents = filteredList.contents;
 		setLists(newList);
-    }
+	};
+	
+	const moveListItem = (direction, list, item, index) => {
+		if (direction === 'up' && index > 0) {
+			list.splice(index - 1, 0, item);
+		} else if (direction === 'down' && index < list.length) {
+			list.splice(index + 1, 0, item);
+		} else {
+			list.splice(index, 0, item);
+		}
+		return list;
+	}
 
 	const addNewList = (name) => {
 		const newLists = [...lists];
@@ -91,12 +113,12 @@ const App = () => {
 								setInput={setInput}
 							/>
 						</Route>
-						<Route path="/:name" render={(props) => <GameList deleteItem={deleteGameFromList} lists={lists} {...props} />} />
+						<Route path="/:name" render={(props) => <GameList changeItem={changeGameListItem} lists={lists} {...props} />} />
 					</Switch>
 				</div>
 			</Router>
     	</div>
-  );
+  	);
 };
 
 export default App;
