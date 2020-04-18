@@ -11,7 +11,7 @@ const SearchResults = (props) => {
 				key={item.id}
 				name={item.name}
 				add={props.add}
-                list={props.lists}
+                lists={props.lists}
 			/>
     	)));
     }, [props.data, props.lists, props.add]);

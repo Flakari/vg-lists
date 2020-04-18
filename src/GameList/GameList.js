@@ -31,6 +31,7 @@ const GameList = (props) => {
                         changeItem={props.changeItem}
                         deleteItem={props.deleteItem}
                         moveItem={props.moveItem}
+                        add={props.add}
                     />
                 })}
             </ul>

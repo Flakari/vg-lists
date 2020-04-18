@@ -10,18 +10,17 @@ const SearchResult = (props) => {
     };
 
     useEffect(() => {
-        setOptions(props.list.map(item => {
+        setOptions(props.lists.map(item => {
             return <option key={item.name} value={item.name}>{item.name}</option>
         }));
-    }, [props.list]);
-
+    }, [props.lists]);
 
     return (
         <ListItem {...props}>
             <select onChange={onChangeHandler}>
                 {options}
             </select>
-            <button onClick={() => props.add(props.list, props.name, selection || props.list[0].name)}>Add</button>
+            <button onClick={() => props.add(props.lists, props.name, selection || props.lists[0].name)}>Add</button>
     </ListItem>);  
 };
 

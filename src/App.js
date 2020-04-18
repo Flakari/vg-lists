@@ -87,10 +87,14 @@ const App = () => {
 	}
 
 	const addNewList = (name) => {
+		if (name.trim() === '') {
+			return;
+		}
+
 		const newLists = [...lists];
 		newLists.push({
 			name: name.trim(),
-			linkRoute: name.toLowerCase().split(' ').join('-'),
+			linkRoute: name.trim().toLowerCase().split(' ').join('-'),
 			contents: []
 		});
 		setLists(newLists);
@@ -113,7 +117,7 @@ const App = () => {
 								setInput={setInput}
 							/>
 						</Route>
-						<Route path="/:name" render={(props) => <GameList changeItem={changeGameListItem} lists={lists} {...props} />} />
+						<Route path="/:name" render={(props) => <GameList changeItem={changeGameListItem} lists={lists} add={addGameToList} {...props} />} />
 					</Switch>
 				</div>
 			</Router>
