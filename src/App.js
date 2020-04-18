@@ -87,17 +87,25 @@ const App = () => {
 	}
 
 	const addNewList = (name) => {
-		if (name.trim() === '') {
+		const trimmedName = name.trim();
+		if (trimmedName === '') {
 			return;
 		}
 
-		const newLists = [...lists];
-		newLists.push({
-			name: name.trim(),
-			linkRoute: name.trim().toLowerCase().split(' ').join('-'),
-			contents: []
+		const listNames = [];
+		lists.forEach(item => {
+			listNames.push(item.name.toLowerCase());
 		});
-		setLists(newLists);
+
+		if (listNames.indexOf(trimmedName.toLowerCase()) === -1) {
+			const newLists = [...lists];
+			newLists.push({
+				name: trimmedName,
+				linkRoute: trimmedName.toLowerCase().split(' ').join('-'),
+				contents: []
+			});
+			setLists(newLists);
+		}
 	};
 
   	return (

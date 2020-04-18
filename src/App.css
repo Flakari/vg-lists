@@ -43,7 +43,9 @@ img {
 #search-results li, #game-list li {
   margin: 0 auto;
   margin-bottom: 10px;
-  width: 30%;
+  width: 50%;
+  min-width: 250px;
+  max-width: 400px;
   padding: 10px 20px;
   list-style-type: none;
   background-color: lightgray;
