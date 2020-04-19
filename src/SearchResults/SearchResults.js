@@ -2,19 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchResult from '../SearchResult/SearchResult';
 
 const SearchResults = (props) => {
-    const [dataDisplay, setDataDisplay] = useState([]);
     const [input, setInput] = useState('');
-    
-    useEffect(() => {
-		setDataDisplay([...props.data].map(item => (
-      		<SearchResult
-				key={item.id}
-				name={item.name}
-				add={props.add}
-                lists={props.lists}
-			/>
-    	)));
-    }, [props.data, props.lists, props.add]);
       
     const searchSubmitHandler = async () => {
 		console.log(input.split(' ').join('-'));
@@ -55,11 +43,18 @@ const SearchResults = (props) => {
                 <input type="text" onChange={inputChangeHandler} value={input} />
                 <input type="submit" value="Submit" />
             </form>
-            {dataDisplay.length === 0 ? null : (
+            {props.data.length === 0 ? null : (
                 <>
                     <h1>Results for {props.searchInput}...</h1>
                     <ul id="search-results">
-                    {dataDisplay}
+                    {props.data.map(item => (
+						<SearchResult
+							key={item.id}
+							name={item.name}
+							add={props.add}
+							lists={props.lists}
+						/>
+    				))}
                     </ul>
                 </>)}
             <footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>

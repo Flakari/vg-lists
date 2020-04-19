@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Sidebar from './Sidebar/Sidebar';
 import SearchResults from './SearchResults/SearchResults';
@@ -19,7 +19,31 @@ const App = () => {
 			linkRoute: 'other',
 			contents: []
 		}
-  	]);
+	]);
+	const [games, setGames] = useState({
+		test: {
+			name: 'Test Game',
+			date: '2013-09-17',
+			consoles: [],
+			rating: null
+		}
+	});  
+
+	useEffect(() => {
+		const tempGames = JSON.parse(JSON.stringify(games));
+		tempGames['new-game'] = {
+			name: 'New Game',
+			date: '2020-04-19',
+			consoles: [],
+			rating: null
+		};
+		setGames(tempGames);
+		console.log(games['test']);
+	}, []);
+
+	useEffect(() => {
+		console.log(games);
+	}, [games]);
 
 	const setData = (data) => {
     	setSearchData(data);
@@ -59,7 +83,6 @@ const App = () => {
 
 		// Grabs list item based on index value
 		const changingItem = filteredList.contents.splice(index, 1)[0];
-		console.log(changingItem);
 
 		// Runs function based on command
 		if (command === 'up' || command === 'down') {

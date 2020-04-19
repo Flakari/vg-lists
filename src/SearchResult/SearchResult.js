@@ -3,7 +3,7 @@ import ListItem from '../ListItem/ListItem';
 
 const SearchResult = (props) => {
     const [options, setOptions] = useState([]);
-    const [selection, setSelection] = useState('');
+    const [selection, setSelection] = useState(props.lists[0].name);
 
     const onChangeHandler = (e) => {
         setSelection(e.target.value);
@@ -20,7 +20,7 @@ const SearchResult = (props) => {
             <select onChange={onChangeHandler}>
                 {options}
             </select>
-            <button onClick={() => props.add(props.lists, props.name, selection || props.lists[0].name)}>Add</button>
+            <button onClick={() => props.add(props.lists, props.name, selection)}>Add</button>
     </ListItem>);  
 };
 
