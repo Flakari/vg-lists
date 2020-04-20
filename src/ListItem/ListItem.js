@@ -12,7 +12,8 @@ const ListItem = (props) => {
                 title={props.title}
                 date={props.date}
                 consoles={props.consoles}
-                addGameInfo={props.addGameInfo}/>
+                addGameInfo={props.addGameInfo}
+            />
         </li>
     )
 }

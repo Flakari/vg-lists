@@ -20,26 +20,7 @@ const App = () => {
 			contents: []
 		}
 	]);
-	const [games, setGames] = useState({
-		test: {
-			name: 'Test Game',
-			date: '2013-09-17',
-			consoles: [],
-			rating: null
-		}
-	});  
-
-	useEffect(() => {
-		const tempGames = JSON.parse(JSON.stringify(games));
-		tempGames['new-game'] = {
-			name: 'New Game',
-			date: '2020-04-19',
-			consoles: [],
-			rating: null
-		};
-		setGames(tempGames);
-		console.log(games['test']);
-	}, []);
+	const [games, setGames] = useState({});  
 
 	useEffect(() => {
 		console.log(games);

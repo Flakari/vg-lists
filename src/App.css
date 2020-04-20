@@ -62,3 +62,12 @@ img {
   width: 150px;
   text-overflow: ellipsis;
 }
+
+.rating {
+  background-color: yellow;
+  opacity: 0.5;
+}
+
+.rating-hover {
+  opacity: 1;
+}
