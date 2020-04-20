@@ -57,6 +57,8 @@ const SearchResults = (props) => {
 							add={props.add}
 							lists={props.lists}
 							games={props.games}
+							setGames={props.setGames}
+							addGameInfo={props.addGameInfo}
 						/>
     				))}
                     </ul>

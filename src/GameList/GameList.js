@@ -31,6 +31,7 @@ const GameList = (props) => {
                         gameList={listData.name}
                         changeItem={props.changeItem}
                         add={props.add}
+                        setGames={props.setGames}
                     />
                 })}
             </ul>

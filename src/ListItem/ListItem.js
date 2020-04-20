@@ -5,7 +5,14 @@ const ListItem = (props) => {
     return (
         <li>
             {props.children}
-            <Rating />
+            <Rating 
+                games={props.games}
+                setGames={props.setGames}
+                name={props.name}
+                title={props.title}
+                date={props.date}
+                consoles={props.consoles}
+                addGameInfo={props.addGameInfo}/>
         </li>
     )
 }

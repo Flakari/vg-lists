@@ -36,7 +36,7 @@ const GameListItem = (props) => {
     );
 
     return (
-        <ListItem {...props}>
+        <ListItem games={props.games} setGames={props.setGames} name={props.name} rating={props.rating}>
             <h2>{gameInfo.name}</h2>
             <p>{gameInfo.date}</p>
             <button onClick={() => { props.changeItem('delete', ...changeArgs); }}>Delete</button><br />
