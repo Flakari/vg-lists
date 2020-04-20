@@ -5,6 +5,8 @@ const GameListItem = (props) => {
     const [copyInputVisible, setCopyInputVisible] = useState(false);
     const [options, setOptions] = useState([]);
     const [selection, setSelection] = useState('');
+    const changeArgs = [props.lists, props.gameList, props.index];
+    const gameInfo = props.games[props.name];
 
     const onChangeHandler = (e) => {
         setSelection(e.target.value);
@@ -29,15 +31,17 @@ const GameListItem = (props) => {
             <select onChange={onChangeHandler}>
                 {options}
             </select>
-            <button onClick={() => {props.add(props.lists, props.name, selection); copyClickHandler();}}>Add</button>
+            <button onClick={() => {props.add(props.lists, props.games, props.name, props.title, props.date, props.rating, props.consoles, selection); copyClickHandler();}}>Add</button>
         </>
     );
 
     return (
         <ListItem {...props}>
-            <button onClick={() => { props.changeItem('delete', props.lists, props.gameList, props.index); }}>Delete</button><br />
-            <button onClick={() => { props.changeItem('up', props.lists, props.gameList, props.index); }}>Move Up</button><br />
-            <button onClick={() => { props.changeItem('down', props.lists, props.gameList, props.index); }}>Move Down</button><br />
+            <h2>{gameInfo.name}</h2>
+            <p>{gameInfo.date}</p>
+            <button onClick={() => { props.changeItem('delete', ...changeArgs); }}>Delete</button><br />
+            <button onClick={() => { props.changeItem('up', ...changeArgs); }}>Move Up</button><br />
+            <button onClick={() => { props.changeItem('down', ...changeArgs); }}>Move Down</button><br />
             <button onClick={copyClickHandler}>{!copyInputVisible ? 'Copy To Other List' : 'Cancel'}</button>
             {copyInputVisible ? optionDisplay : null}
             <p>{props.index}</p>

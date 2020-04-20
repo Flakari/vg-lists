@@ -27,6 +27,7 @@ const GameList = (props) => {
                         name={item.name}
                         index={item.index}
                         lists={props.lists}
+                        games={props.games}
                         gameList={listData.name}
                         changeItem={props.changeItem}
                         add={props.add}

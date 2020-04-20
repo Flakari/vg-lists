@@ -17,11 +17,13 @@ const SearchResult = (props) => {
 
     return (
         <ListItem {...props}>
+            <h2>{props.title}</h2>
             <select onChange={onChangeHandler}>
                 {options}
             </select>
-            <button onClick={() => props.add(props.lists, props.name, selection)}>Add</button>
-    </ListItem>);  
+            <button onClick={() => props.add(props.lists, props.games, props.name, props.title, props.date, props.rating, props.consoles, selection)}>Add</button>
+        </ListItem>
+    );  
 };
 
 export default SearchResult;

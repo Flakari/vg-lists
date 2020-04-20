@@ -1,10 +1,11 @@
 import React from 'react';
+import Rating from '../Rating/Rating';
 
-const ListItem = props => {
+const ListItem = (props) => {
     return (
         <li>
-            <h2>{props.name}</h2>
             {props.children}
+            <Rating />
         </li>
     )
 }

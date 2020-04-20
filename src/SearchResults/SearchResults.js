@@ -50,9 +50,13 @@ const SearchResults = (props) => {
                     {props.data.map(item => (
 						<SearchResult
 							key={item.id}
-							name={item.name}
+							name={item.slug}
+							title={item.name}
+							date={item.released}
+							consoles={item.platforms}
 							add={props.add}
 							lists={props.lists}
+							games={props.games}
 						/>
     				))}
                     </ul>

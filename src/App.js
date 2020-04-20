@@ -53,8 +53,20 @@ const App = () => {
 		setSearchInput(input);
 	}
 
-	const addGameToList = (lists, game, listName) => {
+	const addGameToList = (lists, games, gameName, gameTitle, date, rating, consoles, listName) => {
 		const newLists = JSON.parse(JSON.stringify([...lists]));
+		const newGames = JSON.parse(JSON.stringify({...games}));
+
+		if (newGames[gameName] === undefined) {
+			newGames[gameName] = {
+				name: gameTitle,
+				date: date,
+				consoles: [],
+				rating: null
+			}
+			setGames(newGames);
+		}
+
 		for (let i = 0; i < newLists.length; i++) {
 			console.log([listName, newLists[i].name]);
 			if (newLists[i].name === listName) {
@@ -63,8 +75,8 @@ const App = () => {
 					gameList.push(item.name);
 				});
 
-				if (gameList.indexOf(game) === -1) {
-					newLists[i].contents.push({name: game, index: newLists[i].contents.length});
+				if (gameList.indexOf(gameName) === -1) {
+					newLists[i].contents.push({name: gameName, index: newLists[i].contents.length});
 					setLists(newLists);
 				}
 			} 
@@ -140,7 +152,8 @@ const App = () => {
 					<Switch>
 						<Route exact path="/">
 							<SearchResults 
-								lists={lists} 
+								lists={lists}
+								games={games}
 								add={addGameToList} 
 								data={searchData} 
 								setData={setData}
@@ -148,7 +161,7 @@ const App = () => {
 								setInput={setInput}
 							/>
 						</Route>
-						<Route path="/:name" render={(props) => <GameList changeItem={changeGameListItem} lists={lists} add={addGameToList} {...props} />} />
+						<Route path="/:name" render={(props) => <GameList changeItem={changeGameListItem} lists={lists} add={addGameToList} games={games} {...props} />} />
 					</Switch>
 				</div>
 			</Router>
