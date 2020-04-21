@@ -61,12 +61,19 @@ const App = () => {
 
 	const addGameInformation = (games, gameName, gameTitle, date, rating, consoles) => {
 		const newGames = JSON.parse(JSON.stringify({...games}));
+		const tempConsoles = [];
+		consoles.forEach(item => {
+			tempConsoles.push({
+				name: item.platform.name,
+				owned: false
+			});
+		});
 		
 		if (newGames[gameName] === undefined) {
 			newGames[gameName] = {
 				name: gameTitle,
 				date: date,
-				consoles: [],
+				consoles: tempConsoles,
 				rating: rating || null
 			}
 			setGames(newGames);
