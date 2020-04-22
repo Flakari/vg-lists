@@ -19,14 +19,14 @@ const Rating = (props) => {
     }, [props.games, props.name])
     
 
-    async function clickHandler(games, number) {
-        if (!games.hasOwnProperty(props.name)) {
+    async function clickHandler(number) {
+        if (!props.games.hasOwnProperty(props.name)) {
             await new Promise((resolve) => {
-                props.addGameInfo(props.games, props.name, props.title, props.date, number, props.consoles);
+                props.addGameInfo(props.title, props.date, number, props.consoles, props.image);
             });
         }
 
-        const newGames = JSON.parse(JSON.stringify(games));
+        const newGames = JSON.parse(JSON.stringify(props.games));
         newGames[props.name].rating = number;
         props.setGames(newGames);
         setGameRating(() => {
@@ -46,12 +46,12 @@ const Rating = (props) => {
                         className={`rating ${hoverValue >= item ? 'rating-hover' : null}`}
                         onMouseEnter={() => setHoverValue(item)}
                         onMouseLeave={() => setHoverValue(gameRating)}
-                        onClick={() => clickHandler(props.games, item)}
+                        onClick={() => clickHandler(item)}
                     >{item}</button>
                 );
             })}
             <br />
-            <button onClick={() => {clickHandler(props.games, 0)}}>Remove Rating</button>
+            <button onClick={() => {clickHandler(0)}}>Remove Rating</button>
         </div>
     );
 };

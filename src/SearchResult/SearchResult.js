@@ -21,7 +21,7 @@ const SearchResult = (props) => {
             <select onChange={onChangeHandler}>
                 {options}
             </select>
-            <button onClick={() => props.add(props.lists, props.games, props.name, props.title, props.date, props.rating, props.consoles, selection)}>Add</button>
+            <button onClick={() => {props.add(props.name, selection); props.addGameInfo(props.name, props.title, props.date, props.rating, props.consoles, props.image);}}>Add</button>
         </ListItem>
     );  
 };

@@ -71,3 +71,7 @@ img {
 .rating-hover {
   opacity: 1;
 }
+
+#search-results li .owned, #game-list li .owned {
+  background-color: green;
+}

@@ -38,10 +38,8 @@ const App = () => {
 		setGames(games);
 	};
 
-	const addGameToList = (lists, games, gameName, gameTitle, date, rating, consoles, listName) => {
+	const addGameToList = (gameName, listName) => {
 		const newLists = JSON.parse(JSON.stringify([...lists]));
-		
-		addGameInformation(games, gameName, gameTitle, date, rating, consoles);
 
 		for (let i = 0; i < newLists.length; i++) {
 			console.log([listName, newLists[i].name]);
@@ -59,12 +57,13 @@ const App = () => {
 		}
 	}
 
-	const addGameInformation = (games, gameName, gameTitle, date, rating, consoles) => {
+	const addGameInformation = (gameName, gameTitle, date, rating, consoles, image) => {
 		const newGames = JSON.parse(JSON.stringify({...games}));
 		const tempConsoles = [];
 		consoles.forEach(item => {
+			const name = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
 			tempConsoles.push({
-				name: item.platform.name,
+				name: name,
 				owned: false
 			});
 		});
@@ -74,13 +73,14 @@ const App = () => {
 				name: gameTitle,
 				date: date,
 				consoles: tempConsoles,
-				rating: rating || null
+				rating: rating || null,
+				image: image
 			}
 			setGames(newGames);
 		}
 	}
 
-	const changeGameListItem = (command, lists, list, index) => {
+	const changeGameListItem = (command, list, index) => {
 		let listIndex;
 		let newList = JSON.parse(JSON.stringify([...lists]));
 

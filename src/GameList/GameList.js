@@ -26,6 +26,7 @@ const GameList = (props) => {
                         key={item.name}
                         name={item.name}
                         index={item.index}
+                        image={item['background-image']}
                         lists={props.lists}
                         games={props.games}
                         gameList={listData.name}

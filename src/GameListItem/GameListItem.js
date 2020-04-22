@@ -5,7 +5,7 @@ const GameListItem = (props) => {
     const [copyInputVisible, setCopyInputVisible] = useState(false);
     const [options, setOptions] = useState([]);
     const [selection, setSelection] = useState('');
-    const changeArgs = [props.lists, props.gameList, props.index];
+    const changeArgs = [props.gameList, props.index];
     const gameInfo = props.games[props.name];
 
     const onChangeHandler = (e) => {
@@ -31,12 +31,12 @@ const GameListItem = (props) => {
             <select onChange={onChangeHandler}>
                 {options}
             </select>
-            <button onClick={() => {props.add(props.lists, props.games, props.name, props.title, props.date, props.rating, props.consoles, selection); copyClickHandler();}}>Add</button>
+            <button onClick={() => {props.add(props.name, selection); copyClickHandler();}}>Add</button>
         </>
     );
 
     return (
-        <ListItem games={props.games} setGames={props.setGames} name={props.name} rating={props.rating} consoles={props.games[props.name].consoles}>
+        <ListItem games={props.games} setGames={props.setGames} name={props.name} rating={props.rating} consoles={props.games[props.name].consoles} image={gameInfo.image}>
             <h2>{gameInfo.name}</h2>
             <p>{gameInfo.date}</p>
             <button onClick={() => { props.changeItem('delete', ...changeArgs); }}>Delete</button><br />
