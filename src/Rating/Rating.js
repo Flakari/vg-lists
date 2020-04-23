@@ -22,7 +22,7 @@ const Rating = (props) => {
     async function clickHandler(number) {
         if (!props.games.hasOwnProperty(props.name)) {
             await new Promise((resolve) => {
-                props.addGameInfo(props.title, props.date, number, props.consoles, props.image);
+                props.addGameInfo(props.name, props.title, props.date, number, props.consoles, props.image);
             });
         }
 

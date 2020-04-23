@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Consoles = (props) => {
     const [hasStoredData, setHasStoredData] = useState(props.games.hasOwnProperty(props.name));
 
-    async function onClickHandler(index) {
+    useEffect(() => {
+        setHasStoredData(props.games.hasOwnProperty(props.name))
+    }, [props]);
+
+    const onClickHandler = (index) => {
+        console.log(props.consoles);
         const tempGames = JSON.parse(JSON.stringify(props.games));
         if (!hasStoredData) {
-            await new Promise((resolve) => {
-                props.addGameInfo(props.name, props.title, props.date, null, props.consoles, props.image);
-                setHasStoredData(true);
-            })
-            .then(() => {
-                tempGames[props.name].consoles[index].owned = !tempGames[props.name].consoles[index].owned;
-                props.setGames(tempGames);
+            const tempConsoles = [...props.consoles].map((item, i) => {
+                return {
+                    name: item.platform.name,
+                    owned: index === i
+                }
             });
+            props.addGameInfo(props.name, props.title, props.date, null, tempConsoles, props.image);
+            setHasStoredData(true);
         } else {
             tempGames[props.name].consoles[index].owned = !tempGames[props.name].consoles[index].owned;
             props.setGames(tempGames);

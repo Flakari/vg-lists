@@ -64,7 +64,7 @@ const App = () => {
 			const name = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
 			tempConsoles.push({
 				name: name,
-				owned: false
+				owned: item.hasOwnProperty('owned') ? item.owned : false
 			});
 		});
 		
