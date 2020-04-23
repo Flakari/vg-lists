@@ -19,37 +19,42 @@ const Rating = (props) => {
     }, [props.games, props.name])
     
 
-    async function clickHandler(number) {
+    const clickHandler = (number) => {
         if (!props.games.hasOwnProperty(props.name)) {
-            await new Promise((resolve) => {
-                props.addGameInfo(props.name, props.title, props.date, number, props.consoles, props.image);
+            props.addGameInfo(props.name, props.title, props.date, number, props.consoles, props.image);
+        } else {
+            const newGames = JSON.parse(JSON.stringify(props.games));
+            newGames[props.name].rating = number;
+            props.setGames(newGames);
+            setGameRating(() => {
+                if (props.games.hasOwnProperty(props.name)) {
+                    return props.games[props.name].rating;
+                }
             });
         }
-
-        const newGames = JSON.parse(JSON.stringify(props.games));
-        newGames[props.name].rating = number;
-        props.setGames(newGames);
-        setGameRating(() => {
-            if (props.games.hasOwnProperty(props.name)) {
-                return props.games[props.name].rating;
-            }
-        });
     };
 
     return (
         <div>
             <p>Rating: {gameRating || '-'}/5</p>
+            <div className='rating-container'>
             {[0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].map(item => {
                 return (
-                    <button
-                        key={item}
-                        className={`rating ${hoverValue >= item ? 'rating-hover' : null}`}
+                    <div 
+                        className={item % 1 === 0 ? 'even' : 'odd'}
                         onMouseEnter={() => setHoverValue(item)}
                         onMouseLeave={() => setHoverValue(gameRating)}
                         onClick={() => clickHandler(item)}
-                    >{item}</button>
+                    >
+                        <div
+                            key={item}
+                            className={`rating ${hoverValue >= item && 'rating-hover'}`}
+                            
+                        ></div>
+                    </div>
                 );
             })}
+            </div>
             <br />
             <button onClick={() => {clickHandler(0)}}>Remove Rating</button>
         </div>
