@@ -40,16 +40,15 @@ const Rating = (props) => {
             <div className='rating-container'>
             {[0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].map(item => {
                 return (
-                    <div 
+                    <div
+                        key={item}
                         className={item % 1 === 0 ? 'even' : 'odd'}
                         onMouseEnter={() => setHoverValue(item)}
                         onMouseLeave={() => setHoverValue(gameRating)}
                         onClick={() => clickHandler(item)}
                     >
                         <div
-                            key={item}
                             className={`rating ${hoverValue >= item && 'rating-hover'}`}
-                            
                         ></div>
                     </div>
                 );

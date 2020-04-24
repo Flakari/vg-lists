@@ -3,6 +3,7 @@ import './App.css';
 import Sidebar from './Sidebar/Sidebar';
 import SearchResults from './SearchResults/SearchResults';
 import GameList from './GameList/GameList';
+import Header from './Header/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
@@ -142,8 +143,8 @@ const App = () => {
 
   	return (
     	<div className="App">
-			<Router>
-				<header></header>
+			<Router basename='/vg-lists'>
+				<Header setData={setData}/>
 				<Sidebar lists={lists} add={addNewList}/>
 				<div id="main-container">
 					<Switch>

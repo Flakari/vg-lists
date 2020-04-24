@@ -1,51 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import SearchResult from '../SearchResult/SearchResult';
 
 const SearchResults = (props) => {
-    const [input, setInput] = useState('');
-      
-    const searchSubmitHandler = async () => {
-		console.log(input.split(' ').join('-'));
-		fetch(`https://api.rawg.io/api/games?search=${input.split(' ').join('-')}`, {
-				"method": "GET",
-				"headers": {
-				"User-Agent": "https://github.com/Flakari/vg-lists/"
-			}
-		})
-		.then(response => {
-			return response;
-		})
-		.then(response => {
-			return response.json();
-		})
-		.then(response => {
-			console.log(response.results);
-			props.setData(response.results);
-		})
-		.catch(err => {
-			console.log(err);
-		});
-	}
-
-    useEffect(() => {
-		for (let i = 0; i < props.lists.length; i++) {
-			console.table(props.lists[i].name, props.lists[i].contents);
-		}
-	}, [props.lists]);
-
-	const inputChangeHandler = (input) => {
-		setInput(input.target.value);
-	}
-
     return (
         <>
-            <form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); props.setInput(input.trim()) }}>
-                <input type="text" onChange={inputChangeHandler} value={input} />
-                <input type="submit" value="Submit" />
-            </form>
             {props.data.length === 0 ? null : (
                 <>
-                    <h1>Results for {props.searchInput}...</h1>
                     <ul id="search-results">
 						{props.data.map(item => {
 							const itemConsoles = props.games.hasOwnProperty(item.slug) ? props.games[item.slug].consoles : item.platforms;
