@@ -42,7 +42,7 @@ const Rating = (props) => {
                 return (
                     <div
                         key={item}
-                        className={item % 1 === 0 ? 'even' : 'odd'}
+                        className={item % 1 === 0 ? 'full' : 'half'}
                         onMouseEnter={() => setHoverValue(item)}
                         onMouseLeave={() => setHoverValue(gameRating)}
                         onClick={() => clickHandler(item)}

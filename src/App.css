@@ -40,15 +40,12 @@ img {
   margin-top: 0;
 }
 
-#main-container li {
-  color: black
-}
-
 #search-results, #game-list {
   padding: 0;
 }
 
-#search-results li, #game-list li {
+#search-results > li, #game-list > li {
+  color: black;
   margin: 0 auto;
   margin-bottom: 10px;
   width: 50%;
@@ -71,7 +68,7 @@ img {
   text-overflow: ellipsis;
 }
 
-.even, .odd {
+.half, .full {
   display: inline-block;
   height: 40px;
   width: 20px;
@@ -100,12 +97,12 @@ img {
   margin: 0 auto;
 }
 
-.odd > div {
+.half > div {
   clip-path: polygon(100% 0%, 104% 20%, 104% 50%, 100% 70%, 42% 91%, 64% 57%, 4% 35%, 78% 35%);
   --webkit-clip-path: polygon(100% 0%, 104% 20%, 104% 50%, 100% 70%, 42% 91%, 64% 57%, 4% 35%, 78% 35%);
 }
 
-.even > div {
+.full > div {
   -webkit-clip-path: polygon(0% 0%, 18.5% 35%, 98% 35%, 34% 57%, 53.50% 91%, 0% 70%);
   clip-path: polygon(0% 0%, 18.5% 35%, 98% 35%, 34% 57%, 53.50% 91%, 0% 70%);
 }
@@ -124,4 +121,39 @@ header {
 
 header > p {
   margin: 0 30px;
+}
+
+header input[type=text] {
+  width: 400px;
+  height: 25px;
+  border-radius: 6px;
+  padding-left: 20px;
+  font-size: 1em;
+}
+
+.consoles-list {
+  padding: 0;
+}
+
+.consoles-list li {
+  list-style-type: none;
+  font-size: 0.7em;
+  background-color: #4f4f4f;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 4px 10px;
+  border: 2px solid black;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+}
+
+.consoles-list li:hover {
+  background-color: gray;
+}
+
+#search-results li .owned:hover {
+  background-color: lightgreen;
 }

@@ -35,7 +35,6 @@ const Searchbar = (props) => {
     return (
         <form onSubmit={e => { e.preventDefault(); searchSubmitHandler(); }}>
             <input type="text" onChange={inputChangeHandler} value={input} placeholder='Search'/>
-            <input type="submit" value="Submit" />
         </form>
     );
 };

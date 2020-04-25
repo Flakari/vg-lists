@@ -27,7 +27,7 @@ const Consoles = (props) => {
 
     return (
         <div>
-            <ul>
+            <ul className="consoles-list">
                 {props.consoles.map((item, index) => {
                     const platform = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
                     return (

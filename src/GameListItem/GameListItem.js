@@ -44,8 +44,6 @@ const GameListItem = (props) => {
             <button onClick={() => { props.changeItem('down', ...changeArgs); }}>Move Down</button><br />
             <button onClick={copyClickHandler}>{!copyInputVisible ? 'Copy To Other List' : 'Cancel'}</button>
             {copyInputVisible ? optionDisplay : null}
-            <p>{props.index}</p>
-            <p>{props.gameList}</p>
         </ListItem>
     );
 };
