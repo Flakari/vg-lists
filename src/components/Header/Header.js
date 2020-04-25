@@ -6,6 +6,7 @@ const Header = (props) => {
         <header>
             <p>VG Lists</p>
             <Searchbar setData={props.setData}/>
+            <img src={require("../../images/magnifying-glass.svg")} alt="Search"></img>
         </header>
     );
 };

@@ -157,3 +157,14 @@ header input[type=text] {
 #search-results li .owned:hover {
   background-color: lightgreen;
 }
+
+header img {
+  opacity: 0.5;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+header img:hover {
+  opacity: 1;
+}

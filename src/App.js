@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Sidebar from './Sidebar/Sidebar';
-import SearchResults from './SearchResults/SearchResults';
-import GameList from './GameList/GameList';
-import Header from './Header/Header';
+import Sidebar from './components/Sidebar/Sidebar';
+import SearchResults from './components/SearchResults/SearchResults';
+import GameList from './components/GameList/GameList';
+import Header from './components/Header/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
