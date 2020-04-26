@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 const Consoles = (props) => {
     const [hasStoredData, setHasStoredData] = useState(props.games.hasOwnProperty(props.name));
+    const [showWholeList, setShowWholeList] = useState(props.consoles.length <= 5);
+    const needShortenedList = useState(props.consoles.length > 5);
 
     useEffect(() => {
-        setHasStoredData(props.games.hasOwnProperty(props.name))
+        setHasStoredData(props.games.hasOwnProperty(props.name));
     }, [props]);
+
+    const changeListVisiblity = () => {
+        setShowWholeList(!showWholeList);
+    };
 
     const onClickHandler = (index) => {
         console.log(props.consoles);
@@ -28,7 +34,16 @@ const Consoles = (props) => {
     return (
         <div>
             <ul className="consoles-list">
-                {props.consoles.map((item, index) => {
+                {(!needShortenedList || (needShortenedList && showWholeList)) ? props.consoles.map((item, index) => {
+                    const platform = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
+                    return (
+                        <li
+                            className={hasStoredData && item.owned ? 'owned' : null}
+                            onClick={() => onClickHandler(index)}
+                            key={platform}
+                        >{platform}</li>
+                    );
+                }) : [...props.consoles].splice(0, 5).map((item, index) => {
                     const platform = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
                     return (
                         <li
@@ -38,6 +53,7 @@ const Consoles = (props) => {
                         >{platform}</li>
                     );
                 })}
+                {!needShortenedList[0] ? null : <li onClick={changeListVisiblity}>{!showWholeList ? '+' : '-'}</li>}
             </ul>
         </div>
     );
