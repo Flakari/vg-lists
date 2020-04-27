@@ -21,6 +21,7 @@ const Searchbar = (props) => {
 		.then(response => {
 			console.log(response.results);
 			props.setData(response.results);
+			if (props.hasOwnProperty('toggleSearch')) props.toggleSearch();
 		})
 		.catch(err => {
 			console.log(err);
