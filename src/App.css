@@ -107,30 +107,6 @@ img {
   clip-path: polygon(0% 0%, 18.5% 35%, 98% 35%, 34% 57%, 53.50% 91%, 0% 70%);
 }
 
-header {
-  height: 30px;
-  padding: 10px;
-  color: white;
-  background-color: #252525;
-  text-align: left;
-  position: relative;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-}
-
-header > p {
-  margin: 0 30px;
-}
-
-header input[type=text] {
-  width: 400px;
-  height: 25px;
-  border-radius: 6px;
-  padding-left: 20px;
-  font-size: 1em;
-}
-
 .consoles-list {
   padding: 0;
 }
@@ -158,13 +134,8 @@ header input[type=text] {
   background-color: lightgreen;
 }
 
-header img {
-  opacity: 0.5;
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-}
-
-header img:hover {
-  opacity: 1;
+@media screen and (max-width: 450px) {
+  #search-container {
+    display: none;
+  }
 }
