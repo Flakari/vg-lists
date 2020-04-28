@@ -1,0 +1,34 @@
+@use '../../breakpoints.scss';
+
+#sidebar {
+    background-color: #252525;
+    color: white;
+    height: 100vh;
+    width: 15vw;
+    min-width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 60px;
+    z-index: 1;
+
+    a {
+        color: white;
+    }
+
+    ul {
+        padding: 0;
+
+        li {
+            list-style-type: none;
+        }
+    }
+
+    @media screen and (max-width: breakpoints.$mobile) {
+        transition: left 0.5s ease-in-out;
+
+        &.visible {
+            left: -200px;
+        }
+    }
+}

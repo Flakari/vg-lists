@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import Sidebar from './components/Sidebar/Sidebar';
 import SearchResults from './components/SearchResults/SearchResults';
 import GameList from './components/GameList/GameList';
@@ -21,7 +21,8 @@ const App = () => {
 			contents: []
 		}
 	]);
-	const [games, setGames] = useState({});  
+	const [games, setGames] = useState({});
+	const [showSidebar, setShowSidebar] = useState(false);
 
 	useEffect(() => {
 		console.log(games);
@@ -37,6 +38,10 @@ const App = () => {
 
 	const setGamesList = (games) => {
 		setGames(games);
+	};
+
+	const setSidebarVisibility = () => {
+		setShowSidebar(!showSidebar);
 	};
 
 	const addGameToList = (gameName, listName) => {
@@ -144,8 +149,8 @@ const App = () => {
   	return (
     	<div className="App">
 			<Router basename='/vg-lists'>
-				<Header setData={setData}/>
-				<Sidebar lists={lists} add={addNewList}/>
+				<Header setData={setData} setSidebar={setSidebarVisibility}/>
+				<Sidebar lists={lists} add={addNewList} showSidebar={showSidebar}/>
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">

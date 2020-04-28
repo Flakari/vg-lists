@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Sidebar.scss';
 import { Link } from 'react-router-dom';
 
 const Sidebar = (props) => {
@@ -33,7 +34,7 @@ const Sidebar = (props) => {
     );
 
     return (
-        <div id="sidebar">
+        <div id="sidebar" className={props.showSidebar ? 'visible' : null}>
             <Link to={'/'}>Search</Link>
             <button onClick={buttonClickHandler}>{inputVisible ? 'Cancel' : 'Add List'}</button>
             {inputVisible ? input : null}

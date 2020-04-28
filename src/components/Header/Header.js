@@ -12,7 +12,7 @@ const Header = (props) => {
     return (
         <>
             <header>
-                <button><img src={require("../../images/Hamburger_icon.svg")} alt="Toggle Lists"></img></button>
+                <button onClick={props.setSidebar}><img src={require("../../images/Hamburger_icon.svg")} alt="Toggle Lists"></img></button>
                 <p>VG Lists</p>
                 <div id="search-container">
                     <Searchbar setData={props.setData} />
