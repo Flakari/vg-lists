@@ -13,12 +13,14 @@ const App = () => {
 		{
 			name: 'Test',
 			linkRoute: 'test',
-			contents: []
+			contents: [],
+			index: 0
 		},
 		{
 			name: 'Other',
 			linkRoute: 'other',
-			contents: []
+			contents: [],
+			index: 1
 		}
 	]);
 	const [games, setGames] = useState({});
