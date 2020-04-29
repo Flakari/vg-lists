@@ -29,7 +29,8 @@ const GameList = (props) => {
                         image={item['background-image']}
                         lists={props.lists}
                         games={props.games}
-                        gameList={listData.name}
+                        listName={listData.name}
+                        listIndex={listData.index}
                         changeItem={props.changeItem}
                         add={props.add}
                         setGames={props.setGames}

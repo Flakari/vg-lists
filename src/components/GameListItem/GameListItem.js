@@ -5,7 +5,7 @@ const GameListItem = (props) => {
     const [copyInputVisible, setCopyInputVisible] = useState(false);
     const [options, setOptions] = useState([]);
     const [selection, setSelection] = useState('');
-    const changeArgs = [props.gameList, props.index];
+    const changeArgs = [props.listIndex, props.index];
     const gameInfo = props.games[props.name];
 
     const onChangeHandler = (e) => {
@@ -18,13 +18,13 @@ const GameListItem = (props) => {
 
     useEffect(() => {
         let tempList = [...props.lists].filter(item => {
-            return item.name !== props.gameList;
+            return item.name !== props.listName;
         });
         setOptions(tempList.map(item => {
             return <option key={item.name} value={item.name}>{item.name}</option>
         }));
         setSelection(tempList[0].name);
-    }, [props.lists, props.gameList]);
+    }, [props.lists, props.listName]);
 
     const optionDisplay = (
         <>

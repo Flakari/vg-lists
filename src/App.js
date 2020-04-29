@@ -51,7 +51,7 @@ const App = () => {
 	};
 
 	const addGameToList = (gameName, listName) => {
-		const newLists = JSON.parse(JSON.stringify([...lists]));
+		const newLists = JSON.parse(JSON.stringify(lists));
 
 		for (let i = 0; i < newLists.length; i++) {
 			console.log([listName, newLists[i].name]);
@@ -67,10 +67,10 @@ const App = () => {
 				}
 			} 
 		}
-	}
+	};
 
 	const addGameInformation = (gameName, gameTitle, date, rating, consoles, image) => {
-		const newGames = JSON.parse(JSON.stringify({...games}));
+		const newGames = JSON.parse(JSON.stringify(games));
 		const tempConsoles = [];
 		consoles.forEach(item => {
 			const name = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
@@ -90,17 +90,11 @@ const App = () => {
 			}
 			setGames(newGames);
 		}
-	}
+	};
 
-	const changeGameListItem = (command, list, index) => {
-		let listIndex;
-		let newList = JSON.parse(JSON.stringify([...lists]));
-
-		// Filters list being worked on
-		let filteredList = newList.filter((item, index) => {
-			if (item.name === list) listIndex = index;
-            return item.name === list;
-		})[0];
+	const changeGameListItem = (command, listIndex, index) => {
+		let newList = JSON.parse(JSON.stringify(lists));
+		let filteredList = newList[listIndex];
 
 		// Grabs list item based on index value
 		const changingItem = filteredList.contents.splice(index, 1)[0];
@@ -128,7 +122,7 @@ const App = () => {
 			list.splice(index, 0, item);
 		}
 		return list;
-	}
+	};
 
 	const addNewList = (name) => {
 		const trimmedName = name.trim();
@@ -166,7 +160,7 @@ const App = () => {
 		}
 
 		setLists(newLists);
-	}
+	};
 
   	return (
     	<div className="App">

@@ -7,7 +7,7 @@ const Header = (props) => {
 
     const toggleMobileSearch = () => {
         setShowSearch(!showSearch);
-    }
+    };
 
     return (
         <>
