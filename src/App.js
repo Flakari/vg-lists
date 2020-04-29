@@ -30,6 +30,10 @@ const App = () => {
 		console.log(games);
 	}, [games]);
 
+	useEffect(() => {
+		console.log(lists);
+	}, [lists]);
+
 	const setData = (data) => {
     	setSearchData(data);
     };
@@ -132,6 +136,10 @@ const App = () => {
 			return;
 		}
 
+		if (trimmedName.indexOf('/') !== -1 || trimmedName.indexOf('\\') !== -1) {
+			throw new Error('Name cannot include forward or backwards slashes ("/") ("\\")');
+		}
+
 		const listNames = [];
 		lists.forEach(item => {
 			listNames.push(item.name.toLowerCase());
@@ -142,17 +150,29 @@ const App = () => {
 			newLists.push({
 				name: trimmedName,
 				linkRoute: trimmedName.toLowerCase().split(' ').join('-'),
-				contents: []
+				contents: [],
+				index: newLists.length
 			});
 			setLists(newLists);
 		}
 	};
 
+	const deleteList = (index) => {
+		const newLists = JSON.parse(JSON.stringify(lists));
+		newLists.splice(index, 1);
+		
+		for (let i = 0; i < newLists.length; i++) {
+			newLists[i].index = i;
+		}
+
+		setLists(newLists);
+	}
+
   	return (
     	<div className="App">
 			<Router basename='/vg-lists'>
 				<Header setData={setData} setSidebar={setSidebarVisibility}/>
-				<Sidebar lists={lists} add={addNewList} showSidebar={showSidebar}/>
+				<Sidebar lists={lists} add={addNewList} delete={deleteList} showSidebar={showSidebar}/>
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">

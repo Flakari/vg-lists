@@ -1,0 +1,12 @@
+#modal-list-container {
+    padding: 0;
+
+    .modal-list-item {
+        box-sizing: border-box;
+        list-style-type: none;
+        background-color: #ffa500;
+        padding: 5px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+}
