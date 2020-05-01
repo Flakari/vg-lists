@@ -5,8 +5,10 @@ const ConfirmationModal = (props) => {
     return (
         <>
             <p>{props.message}</p>
-            <button onClick={() => props.func(props.funcArgs)}>Yes</button>
-            <button onClick={props.hide}>No</button>
+            <div className='button-container'>
+                <button onClick={() => props.func(props.funcArgs)}>Yes</button>
+                <button onClick={props.hide}>No</button>
+            </div>
         </>
     );
 };

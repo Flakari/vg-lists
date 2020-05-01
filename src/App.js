@@ -50,6 +50,10 @@ const App = () => {
 		setShowSidebar(!showSidebar);
 	};
 
+	const hideSidebar = () => {
+		setShowSidebar(false);
+	};
+
 	const addGameToList = (gameName, listName) => {
 		const newLists = JSON.parse(JSON.stringify(lists));
 
@@ -93,6 +97,10 @@ const App = () => {
 	};
 
 	const changeGameListItem = (command, listIndex, index) => {
+		if ((command === 'up' && index === 0) || (command === 'down' && index === lists.length - 1)) {
+			return;
+		}
+
 		let newList = JSON.parse(JSON.stringify(lists));
 		let filteredList = newList[listIndex];
 
@@ -101,19 +109,34 @@ const App = () => {
 
 		// Runs function based on command
 		if (command === 'up' || command === 'down') {
-			let newList = moveListItem(command, filteredList.contents, changingItem, index);
-			filteredList.contents = newList;
+			let newGameList = moveItem(command, filteredList.contents, changingItem, index);
+			filteredList.contents = newGameList;
 		}
 
 		// Resets index values of game list
 		for (let i = 0; i < filteredList.contents.length; i++) {
-			filteredList.contents[i]['index'] = i;
+			filteredList.contents[i].index = i;
 		}
 		newList[listIndex].contents = filteredList.contents;
 		setLists(newList);
 	};
+
+	const moveList = (direction, index) => {
+		if ((direction === 'up' && index === 0) || (direction === 'down' && index === lists.length - 1)) {
+			return;
+		}
+
+		let newLists = JSON.parse(JSON.stringify(lists));
+		const changingList = newLists.splice(index, 1)[0];
+		newLists = moveItem(direction, newLists, changingList, index);
+		
+		for (let i = 0; i < newLists.length; i++) {
+			newLists[i].index = i;
+		}
+		setLists(newLists);
+	};
 	
-	const moveListItem = (direction, list, item, index) => {
+	const moveItem = (direction, list, item, index) => {
 		if (direction === 'up' && index > 0) {
 			list.splice(index - 1, 0, item);
 		} else if (direction === 'down' && index < list.length) {
@@ -166,7 +189,7 @@ const App = () => {
     	<div className="App">
 			<Router basename='/vg-lists'>
 				<Header setData={setData} setSidebar={setSidebarVisibility}/>
-				<Sidebar lists={lists} add={addNewList} delete={deleteList} showSidebar={showSidebar}/>
+				<Sidebar lists={lists} add={addNewList} delete={deleteList} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList}/>
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">

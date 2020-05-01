@@ -20,12 +20,12 @@ const Sidebar = (props) => {
         setNavigation(props.lists.map(item => {
             const linkName = item.linkRoute;
             return (
-                <li key={item.name}>
+                <li key={item.name} onClick={props.hide}>
                     <Link to={`/${linkName}`}>{`${item.name} [${item.contents.length}]`}</Link>
                 </li>
             );
         }));
-    }, [props.lists]);
+    }, [props.lists, props.hide]);
 
     return (
         <>
@@ -38,9 +38,11 @@ const Sidebar = (props) => {
                 </nav>
                 <button onClick={showModal}>Show Modal</button>
             </div>
-            <Modal modalClass={'list-modal'} showModal={showListModal} hideModal={hideModal}>
-                <ListModal lists={props.lists} add={props.add} delete={props.delete}/>
-            </Modal>
+            {showListModal ? (
+                <Modal modalClass={'list-modal'} showModal={showListModal} hideModal={hideModal}>
+                    <ListModal lists={props.lists} add={props.add} delete={props.delete} moveList={props.moveList}/>
+                </Modal>
+            ) : null}
         </>
     )
 };

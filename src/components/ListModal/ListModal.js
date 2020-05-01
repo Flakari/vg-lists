@@ -54,19 +54,23 @@ const ListModal = (props) => {
                             <div>
                                 <h2>{item.name}</h2>
                                 <button onClick={() => {setDeleteIndex(item.index); showDeleteConfirmation()}}>Delete List</button>
+                                <button onClick={() => props.moveList('up', item.index)}>Move Up</button>
+                                <button onClick={() => props.moveList('down', item.index)}>Move Down</button>
                             </div>
                         </li>
                     );
                 })}
             </ul>
-            <Modal modalClass={'delete-list'} showModal={showDelete} hideModal={hideDeleteConfirmation}>
-                <ConfirmationModal
-                    message='Are you sure you want to delete this list?'
-                    func={deleteItem} 
-                    funcArgs={deleteIndex}
-                    hide={hideDeleteConfirmation}
-                />
-            </Modal>
+            {showDelete ? (
+                <Modal modalClass={'delete-list'} showModal={showDelete} hideModal={hideDeleteConfirmation}>
+                    <ConfirmationModal
+                        message='Are you sure you want to delete this list?'
+                        func={deleteItem} 
+                        funcArgs={deleteIndex}
+                        hide={hideDeleteConfirmation}
+                    />
+                </Modal>
+            ) : null} 
         </>
     );
 };
