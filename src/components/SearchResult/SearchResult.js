@@ -20,6 +20,7 @@ const SearchResult = (props) => {
             <h2>{props.title}</h2>
             <p>{props.date}</p>
             <select onChange={onChangeHandler}>
+                <option>---</option>
                 {options}
             </select>
             <button onClick={() => {props.add(props.name, selection); props.addGameInfo(props.name, props.title, props.date, props.rating, props.consoles, props.image);}}>Add</button>

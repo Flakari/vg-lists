@@ -38,7 +38,7 @@ const Sidebar = (props) => {
                 </nav>
                 <button onClick={showModal}>Show Modal</button>
             </div>
-            <Modal showModal={showListModal} hideModal={hideModal}>
+            <Modal modalClass={'list-modal'} showModal={showListModal} hideModal={hideModal}>
                 <ListModal lists={props.lists} add={props.add} delete={props.delete}/>
             </Modal>
         </>

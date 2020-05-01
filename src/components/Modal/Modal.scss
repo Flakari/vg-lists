@@ -4,6 +4,7 @@
     width: 100%;
     position: fixed;
     top: 0;
+    left: 0;
     background: #000000ab;
     z-index: 20;
 
@@ -14,11 +15,6 @@
     }
 
     .modal-container {
-        background-color: white;
-        padding: 20px;
-        border-radius: 5px;
-        max-width: 600px;
-        width: 90%;
         max-height: 80vh;
         overflow-y: scroll;
         scrollbar-width: none;

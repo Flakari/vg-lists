@@ -23,12 +23,13 @@ const GameListItem = (props) => {
         setOptions(tempList.map(item => {
             return <option key={item.name} value={item.name}>{item.name}</option>
         }));
-        setSelection(tempList[0].name);
+        setSelection('---');
     }, [props.lists, props.listName]);
 
     const optionDisplay = (
         <>
             <select onChange={onChangeHandler}>
+                <option>---</option>
                 {options}
             </select>
             <button onClick={() => {props.add(props.name, selection); copyClickHandler();}}>Add</button>

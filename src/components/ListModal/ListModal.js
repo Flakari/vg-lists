@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import './ListModal.scss';
+import Modal from '../Modal/Modal';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 const ListModal = (props) => {
     const [inputValue, setInputValue] = useState('');
     const [inputVisible, setInputVisible] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
+    const [deleteIndex, setDeleteIndex] = useState(0);
 
     const inputChangeHandler = (input) => {
         setInputValue(input.target.value);
@@ -14,11 +18,20 @@ const ListModal = (props) => {
         setInputVisible(!inputVisible);
     };
 
-    const deleteItem = (index) => {
+    const showDeleteConfirmation = () => {
+        setShowDelete(true);
+    };
+
+    const hideDeleteConfirmation = () => {
+        setShowDelete(false);
+    };
+
+    const deleteItem = async (index) => {
         if (String(document.URL.match(/[^/]+(?=\/$|$)/)) === props.lists[index].linkRoute) {
 		    props.history.push('/');
         }
         props.delete(index);
+        hideDeleteConfirmation();
     };
 
     const input = (
@@ -40,12 +53,20 @@ const ListModal = (props) => {
                         <li key={item.name} className='modal-list-item'>
                             <div>
                                 <h2>{item.name}</h2>
-                                <button onClick={() => deleteItem(item.index)}>Delete List</button>
+                                <button onClick={() => {setDeleteIndex(item.index); showDeleteConfirmation()}}>Delete List</button>
                             </div>
                         </li>
                     );
                 })}
             </ul>
+            <Modal modalClass={'delete-list'} showModal={showDelete} hideModal={hideDeleteConfirmation}>
+                <ConfirmationModal
+                    message='Are you sure you want to delete this list?'
+                    func={deleteItem} 
+                    funcArgs={deleteIndex}
+                    hide={hideDeleteConfirmation}
+                />
+            </Modal>
         </>
     );
 };
