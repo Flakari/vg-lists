@@ -3,7 +3,7 @@ import ListItem from '../ListItem/ListItem';
 
 const SearchResult = (props) => {
     const [options, setOptions] = useState([]);
-    const [selection, setSelection] = useState(props.lists[0].name);
+    const [selection, setSelection] = useState('---');
 
     const onChangeHandler = (e) => {
         setSelection(e.target.value);
