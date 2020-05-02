@@ -147,14 +147,26 @@ const App = () => {
 		return list;
 	};
 
-	const addNewList = (name) => {
+	const createNewList = (name, contents) => {
 		const trimmedName = name.trim();
-		if (trimmedName === '') {
-			return;
-		}
 
 		if (trimmedName.indexOf('/') !== -1 || trimmedName.indexOf('\\') !== -1) {
 			throw new Error('Name cannot include forward or backwards slashes ("/") ("\\")');
+		}
+
+		return ({
+			name: trimmedName,
+			linkRoute: trimmedName.toLowerCase().split(' ').join('-'),
+			contents: contents || [],
+			index: lists.length
+		});
+	}
+
+	const addNewList = (name, contents) => {
+		const trimmedName = name.trim();
+
+		if (trimmedName === '') {
+			return;
 		}
 
 		const listNames = [];
@@ -164,12 +176,7 @@ const App = () => {
 
 		if (listNames.indexOf(trimmedName.toLowerCase()) === -1) {
 			const newLists = [...lists];
-			newLists.push({
-				name: trimmedName,
-				linkRoute: trimmedName.toLowerCase().split(' ').join('-'),
-				contents: [],
-				index: newLists.length
-			});
+			newLists.push(createNewList(name, contents));
 			setLists(newLists);
 		}
 	};
@@ -185,11 +192,15 @@ const App = () => {
 		setLists(newLists);
 	};
 
+	const copyList = (name, listContents) => {
+		addNewList(name, listContents);
+	};
+
   	return (
     	<div className="App">
 			<Router basename='/vg-lists'>
 				<Header setData={setData} setSidebar={setSidebarVisibility}/>
-				<Sidebar lists={lists} add={addNewList} delete={deleteList} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList}/>
+				<Sidebar lists={lists} add={addNewList} delete={deleteList} copy={copyList} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList}/>
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">

@@ -3,19 +3,24 @@ import { withRouter } from 'react-router-dom';
 import './ListModal.scss';
 import Modal from '../Modal/Modal';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
+import ListModalItem from '../ListModalItem/ListModalItem';
 
 const ListModal = (props) => {
-    const [inputValue, setInputValue] = useState('');
-    const [inputVisible, setInputVisible] = useState(false);
+    const [addValue, setAddValue] = useState('');
+    const [showAdd, setShowAdd] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(0);
-
-    const inputChangeHandler = (input) => {
-        setInputValue(input.target.value);
+    
+    const addChangeHandler = (input) => {
+        setAddValue(input.target.value);
     };
 
-    const inputVisibility = () => {
-        setInputVisible(!inputVisible);
+    const addVisibility = () => {
+        setShowAdd(!showAdd);
+    };
+
+    const changeDeleteIndex = (index) => {
+        setDeleteIndex(index);
     };
 
     const showDeleteConfirmation = () => {
@@ -26,7 +31,7 @@ const ListModal = (props) => {
         setShowDelete(false);
     };
 
-    const deleteItem = async (index) => {
+    const deleteItem = (index) => {
         if (String(document.URL.match(/[^/]+(?=\/$|$)/)) === props.lists[index].linkRoute) {
 		    props.history.push('/');
         }
@@ -34,9 +39,9 @@ const ListModal = (props) => {
         hideDeleteConfirmation();
     };
 
-    const input = (
-        <form onSubmit={e => { e.preventDefault(); props.add(inputValue); setInputVisible(false); setInputValue('')}}>
-            <input id="list-input" type="text" value={inputValue} onChange={inputChangeHandler} autoFocus></input>
+    const addInput = (
+        <form onSubmit={e => { e.preventDefault(); props.add(addValue); setShowAdd(false); setAddValue('')}}>
+            <input id="list-input" type="text" value={addValue} onChange={addChangeHandler} autoFocus></input>
             <input type="submit" value="Submit"></input>
         </form>
     );
@@ -45,19 +50,20 @@ const ListModal = (props) => {
         <>
             <h1>List Manager</h1>
             <p>Add, delete, copy, reorganize, and even rename lists here! Your one stop shop for video game list management!</p>
-            <button onClick={inputVisibility}>{inputVisible ? 'Cancel' : 'Add List'}</button>
-                {inputVisible ? input : null}
+            <button onClick={addVisibility}>{showAdd ? 'Cancel' : 'Add List'}</button>
+                {showAdd ? addInput : null}
             <ul id='modal-list-container'>
                 {props.lists.map(item => {
                     return (
-                        <li key={item.name} className='modal-list-item'>
-                            <div>
-                                <h2>{item.name}</h2>
-                                <button onClick={() => {setDeleteIndex(item.index); showDeleteConfirmation()}}>Delete List</button>
-                                <button onClick={() => props.moveList('up', item.index)}>Move Up</button>
-                                <button onClick={() => props.moveList('down', item.index)}>Move Down</button>
-                            </div>
-                        </li>
+                        <ListModalItem 
+                            name={item.name}
+                            index={item.index}
+                            contents={item.contents}
+                            moveList={props.moveList}
+                            deleteIndex={changeDeleteIndex}
+                            showDelete={showDeleteConfirmation}
+                            copy={props.copy}
+                        />
                     );
                 })}
             </ul>
