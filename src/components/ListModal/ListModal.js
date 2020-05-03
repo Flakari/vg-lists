@@ -55,7 +55,8 @@ const ListModal = (props) => {
             <ul id='modal-list-container'>
                 {props.lists.map(item => {
                     return (
-                        <ListModalItem 
+                        <ListModalItem
+                            key={item.name}
                             name={item.name}
                             index={item.index}
                             contents={item.contents}
@@ -63,6 +64,8 @@ const ListModal = (props) => {
                             deleteIndex={changeDeleteIndex}
                             showDelete={showDeleteConfirmation}
                             copy={props.copy}
+                            rename={props.rename}
+                            lists={props.lists}
                         />
                     );
                 })}

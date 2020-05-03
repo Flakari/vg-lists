@@ -58,7 +58,6 @@ const App = () => {
 		const newLists = JSON.parse(JSON.stringify(lists));
 
 		for (let i = 0; i < newLists.length; i++) {
-			console.log([listName, newLists[i].name]);
 			if (newLists[i].name === listName) {
 				const gameList = [];
 				newLists[i].contents.forEach(item => {
@@ -160,7 +159,7 @@ const App = () => {
 			contents: contents || [],
 			index: lists.length
 		});
-	}
+	};
 
 	const addNewList = (name, contents) => {
 		const trimmedName = name.trim();
@@ -182,7 +181,7 @@ const App = () => {
 	};
 
 	const deleteList = (index) => {
-		const newLists = JSON.parse(JSON.stringify(lists));
+		const newLists = [...lists];
 		newLists.splice(index, 1);
 		
 		for (let i = 0; i < newLists.length; i++) {
@@ -196,11 +195,29 @@ const App = () => {
 		addNewList(name, listContents);
 	};
 
+	const renameList = (newName, index) => {
+		const trimmedName = newName.trim();
+
+		if (trimmedName === '') {
+			return;
+		}
+
+		if (trimmedName.indexOf('/') !== -1 || trimmedName.indexOf('\\') !== -1) {
+			throw new Error('Name cannot include forward or backwards slashes ("/") ("\\")');
+		}
+
+		const newLists = [...lists];
+
+		newLists[index].name = trimmedName;
+		newLists[index].linkRoute = trimmedName.toLowerCase().split(' ').join('-');
+		setLists(newLists);
+	};
+
   	return (
     	<div className="App">
 			<Router basename='/vg-lists'>
 				<Header setData={setData} setSidebar={setSidebarVisibility}/>
-				<Sidebar lists={lists} add={addNewList} delete={deleteList} copy={copyList} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList}/>
+				<Sidebar lists={lists} add={addNewList} delete={deleteList} copy={copyList} rename={renameList} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList}/>
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">
