@@ -64,6 +64,7 @@ const ListModal = (props) => {
                             deleteIndex={changeDeleteIndex}
                             showDelete={showDeleteConfirmation}
                             copy={props.copy}
+                            merge={props.merge}
                             rename={props.rename}
                             lists={props.lists}
                         />

@@ -213,11 +213,41 @@ const App = () => {
 		setLists(newLists);
 	};
 
+	const mergeLists = (mergingLists) => {
+		const [listIndexToMerge, mergedList] = mergingLists;
+		let mergedListIndex = 0;
+		let newLists = JSON.parse(JSON.stringify(lists));
+		let combinedContents = new Set();
+
+		for (let list of newLists) {
+			if (list.name === mergedList) {
+				mergedListIndex = list.index;
+			}
+		}
+
+		for (let item of newLists[mergedListIndex].contents) {
+			combinedContents.add(item.name);
+		}
+
+		for (let item of newLists[listIndexToMerge].contents) {
+			combinedContents.add(item.name);
+		}
+
+		newLists[mergedListIndex].contents = [...combinedContents].map((item, index) => {
+			return {
+				name: item,
+				index: index
+			};
+		});
+
+		setLists(newLists);
+	};
+
   	return (
     	<div className="App">
 			<Router basename='/vg-lists'>
 				<Header setData={setData} setSidebar={setSidebarVisibility}/>
-				<Sidebar lists={lists} add={addNewList} delete={deleteList} copy={copyList} rename={renameList} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList}/>
+				<Sidebar lists={lists} add={addNewList} delete={deleteList} copy={copyList} rename={renameList} merge={mergeLists} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList}/>
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">

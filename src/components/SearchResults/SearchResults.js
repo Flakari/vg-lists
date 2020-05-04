@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchResult from '../SearchResult/SearchResult';
 
 const SearchResults = (props) => {
+	const [quickAddOptions, setQuickAddOptions] = useState([]);
+	const [quickAddSelection, setQuickAddSelection] = useState('---');
+
+    const onChangeHandler = (e) => {
+        setQuickAddSelection(e.target.value);
+    };
+
+    useEffect(() => {
+        setQuickAddOptions(props.lists.map(item => {
+            return <option key={item.name} value={item.name}>{item.name}</option>
+        }));
+    }, [props.lists]);
+
     return (
         <>
+			<p>Quick Add:</p>
+			<select onChange={onChangeHandler}>
+                <option>---</option>
+                {quickAddOptions}
+            </select>
             {props.data.length === 0 ? null : (
                 <>
                     <ul id="search-results">
@@ -22,6 +40,7 @@ const SearchResults = (props) => {
 									setGames={props.setGames}
 									addGameInfo={props.addGameInfo}
 									image={item['background_image']}
+									quickAdd={quickAddSelection}
 								/>
 							);
 						})}

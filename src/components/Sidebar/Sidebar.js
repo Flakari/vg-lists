@@ -40,7 +40,7 @@ const Sidebar = (props) => {
             </div>
             {showListModal ? (
                 <Modal modalClass={'list-modal'} showModal={showListModal} hideModal={hideModal}>
-                    <ListModal lists={props.lists} add={props.add} delete={props.delete} copy={props.copy} rename={props.rename} moveList={props.moveList}/>
+                    <ListModal lists={props.lists} add={props.add} delete={props.delete} copy={props.copy} rename={props.rename} merge={props.merge} moveList={props.moveList}/>
                 </Modal>
             ) : null}
         </>
