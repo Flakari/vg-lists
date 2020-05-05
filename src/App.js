@@ -106,7 +106,7 @@ const App = () => {
 				rating: rating || null,
 				image: image
 			}
-			setGames(newGames);
+			setGamesList(newGames);
 		}
 	};
 
