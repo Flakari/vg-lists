@@ -9,22 +9,23 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 const App = () => {
 	const [searchData, setSearchData] = useState('');
 	const [searchInput, setSearchInput] = useState('');
-  	const [lists, setLists] = useState([
-		{
-			name: 'Test',
-			linkRoute: 'test',
-			contents: [],
-			index: 0
-		},
-		{
-			name: 'Other',
-			linkRoute: 'other',
-			contents: [],
-			index: 1
-		}
-	]);
-	const [games, setGames] = useState({});
+  	const [lists, setLists] = useState(
+		window.localStorage && window.localStorage.getItem('lists') ? 
+		JSON.parse(window.localStorage.getItem('lists')) : []);
+	const [games, setGames] = useState(
+		window.localStorage && window.localStorage.getItem('games') ? 
+		JSON.parse(window.localStorage.getItem('games')) : {});
 	const [showSidebar, setShowSidebar] = useState(false);
+
+	useEffect(() => {
+		if (window.localStorage && !window.localStorage.getItem('lists')) {
+			window.localStorage.setItem('lists', JSON.stringify([]));
+		}
+		
+		if (window.localStorage && !window.localStorage.getItem('games')) {
+			window.localStorage.setItem('games', JSON.stringify([]));
+		}
+	}, []);
 
 	useEffect(() => {
 		console.log(games);
@@ -33,6 +34,15 @@ const App = () => {
 	useEffect(() => {
 		console.log(lists);
 	}, [lists]);
+
+	const setListData = (lists) => {
+		if (window.localStorage && window.localStorage.getItem('lists')) {
+			window.localStorage.setItem('lists', JSON.stringify(lists));
+			setLists(JSON.parse(window.localStorage.getItem('lists')));
+		} else {
+			setLists(lists);
+		}
+	};
 
 	const setData = (data) => {
     	setSearchData(data);
@@ -43,7 +53,12 @@ const App = () => {
 	};
 
 	const setGamesList = (games) => {
-		setGames(games);
+		if (window.localStorage && window.localStorage.getItem('games')) {
+			window.localStorage.setItem('games', JSON.stringify(games));
+			setGames(JSON.parse(window.localStorage.getItem('games')));
+		} else {
+			setGames(games);
+		}
 	};
 
 	const setSidebarVisibility = () => {
@@ -66,7 +81,7 @@ const App = () => {
 
 				if (gameList.indexOf(gameName) === -1) {
 					newLists[i].contents.push({name: gameName, index: newLists[i].contents.length});
-					setLists(newLists);
+					setListData(newLists);
 				}
 			} 
 		}
@@ -117,7 +132,7 @@ const App = () => {
 			filteredList.contents[i].index = i;
 		}
 		newList[listIndex].contents = filteredList.contents;
-		setLists(newList);
+		setListData(newList);
 	};
 
 	const moveList = (direction, index) => {
@@ -132,7 +147,7 @@ const App = () => {
 		for (let i = 0; i < newLists.length; i++) {
 			newLists[i].index = i;
 		}
-		setLists(newLists);
+		setListData(newLists);
 	};
 	
 	const moveItem = (direction, list, item, index) => {
@@ -176,7 +191,7 @@ const App = () => {
 		if (listNames.indexOf(trimmedName.toLowerCase()) === -1) {
 			const newLists = [...lists];
 			newLists.push(createNewList(name, contents));
-			setLists(newLists);
+			setListData(newLists);
 		}
 	};
 
@@ -188,7 +203,7 @@ const App = () => {
 			newLists[i].index = i;
 		}
 
-		setLists(newLists);
+		setListData(newLists);
 	};
 
 	const copyList = (name, listContents) => {
@@ -210,7 +225,7 @@ const App = () => {
 
 		newLists[index].name = trimmedName;
 		newLists[index].linkRoute = trimmedName.toLowerCase().split(' ').join('-');
-		setLists(newLists);
+		setListData(newLists);
 	};
 
 	const mergeLists = (mergingLists) => {
@@ -240,7 +255,7 @@ const App = () => {
 			};
 		});
 
-		setLists(newLists);
+		setListData(newLists);
 	};
 
   	return (

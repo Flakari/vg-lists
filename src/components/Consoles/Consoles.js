@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 const Consoles = (props) => {
     const [hasStoredData, setHasStoredData] = useState(props.games.hasOwnProperty(props.name));
-    const [showWholeList, setShowWholeList] = useState(props.consoles.length <= 5);
-    const needShortenedList = useState(props.consoles.length > 5);
+    const [showWholeList, setShowWholeList] = useState(props.consoles === null ? false : props.consoles.length <= 5);
+    const needShortenedList = useState(props.consoles === null ? false : props.consoles.length > 5);
 
     useEffect(() => {
         setHasStoredData(props.games.hasOwnProperty(props.name));
@@ -34,7 +34,7 @@ const Consoles = (props) => {
     return (
         <div>
             <ul className="consoles-list">
-                {(!needShortenedList || (needShortenedList && showWholeList)) ? props.consoles.map((item, index) => {
+                {props.consoles === null ? null : (!needShortenedList || (needShortenedList && showWholeList)) ? props.consoles.map((item, index) => {
                     const platform = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
                     return (
                         <li

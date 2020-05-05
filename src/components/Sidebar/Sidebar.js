@@ -31,12 +31,16 @@ const Sidebar = (props) => {
         <>
             <div id="sidebar" className={props.showSidebar ? 'visible' : null}>
                 <Link to={'/'}>Search</Link>
-                <nav>
-                    <ul>
-                        {navigation}
-                    </ul>
-                </nav>
                 <button onClick={showModal}>Show Modal</button>
+                {props.lists.length === 0 ? <p>Add a list to see it here!</p> : 
+                    <>
+                        <nav>
+                            <ul>
+                                {navigation}
+                            </ul>
+                        </nav> 
+                    </>
+                }
             </div>
             {showListModal ? (
                 <Modal modalClass={'list-modal'} showModal={showListModal} hideModal={hideModal}>

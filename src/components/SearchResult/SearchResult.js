@@ -25,7 +25,6 @@ const SearchResult = (props) => {
             </select>
             <button onClick={() => {props.add(props.name, selection); props.addGameInfo(props.name, props.title, props.date, props.rating, props.consoles, props.image);}}>Add</button>
             <button onClick={() => {props.add(props.name, props.quickAdd); props.addGameInfo(props.name, props.title, props.date, props.rating, props.consoles, props.image);}}>Quick Add</button>
-
         </ListItem>
     );  
 };
