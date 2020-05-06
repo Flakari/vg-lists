@@ -26,7 +26,7 @@ const Searchbar = (props) => {
 		.catch(err => {
 			console.log(err);
 		});
-		props.history.push('/');
+		props.history.push('/search');
     }
     
     const inputChangeHandler = (input) => {

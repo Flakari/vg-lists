@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Header.scss';
 import Searchbar from '../Searchbar/Searchbar';
+import { Link } from 'react-router-dom';
 
 const Header = (props) => {
     const [showSearch, setShowSearch] = useState(false);
@@ -13,7 +14,7 @@ const Header = (props) => {
         <>
             <header>
                 <button onClick={props.setSidebar}><img src={require("../../images/Hamburger_icon.svg")} alt="Toggle Lists"></img></button>
-                <p>VG Lists</p>
+                <Link to='/'>VG Lists</Link>
                 <div id="search-container">
                     <Searchbar setData={props.setData} />
                 </div>

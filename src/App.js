@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
+import Home from './components/Home/Home';
 import Sidebar from './components/Sidebar/Sidebar';
 import SearchResults from './components/SearchResults/SearchResults';
 import GameList from './components/GameList/GameList';
@@ -11,7 +12,13 @@ const App = () => {
 	const [searchInput, setSearchInput] = useState('');
   	const [lists, setLists] = useState(
 		window.localStorage && window.localStorage.getItem('lists') ? 
-		JSON.parse(window.localStorage.getItem('lists')) : []);
+		JSON.parse(window.localStorage.getItem('lists')) : [
+			{ name: 'Owned', linkRoute: 'owned', contents: [], index: 0 },
+			{ name: 'Completed', linkRoute: 'completed', contents: [], index: 1 },
+			{ name: 'Currently Playing', linkRoute: 'currently-playing', contents: [], index: 2 },
+			{ name: 'Wishlist', linkRoute: 'wishlist', contents: [], index: 3 },
+			{ name: 'Backlog', linkRoute: 'backlog', contents: [], index: 4 }
+		]);
 	const [games, setGames] = useState(
 		window.localStorage && window.localStorage.getItem('games') ? 
 		JSON.parse(window.localStorage.getItem('games')) : {});
@@ -19,7 +26,13 @@ const App = () => {
 
 	useEffect(() => {
 		if (window.localStorage && !window.localStorage.getItem('lists')) {
-			window.localStorage.setItem('lists', JSON.stringify([]));
+			window.localStorage.setItem('lists', JSON.stringify([
+				{ name: 'Owned', linkRoute: 'owned', contents: [], index: 0 },
+				{ name: 'Completed', linkRoute: 'completed', contents: [], index: 1 },
+				{ name: 'Currently Playing', linkRoute: 'currently-playing', contents: [], index: 2 },
+				{ name: 'Wishlist', linkRoute: 'wishlist', contents: [], index: 3 },
+				{ name: 'Backlog', linkRoute: 'backlog', contents: [], index: 4 }
+			]));
 		}
 		
 		if (window.localStorage && !window.localStorage.getItem('games')) {
@@ -266,6 +279,9 @@ const App = () => {
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">
+							<Home lists={lists}/>
+						</Route>
+						<Route path="/search">
 							<SearchResults 
 								lists={lists}
 								games={games}

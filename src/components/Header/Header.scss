@@ -34,10 +34,16 @@ header {
         }
     }
 
-    > p {
+    > a {
+        text-decoration: none;
         margin: 0 15px;
         font-size: 1.3em;
         font-variant: petite-caps;
+        color: white;
+
+        &:hover {
+            text-shadow: white 0 0 2px;
+        }
     }
 
     input[type=text] {

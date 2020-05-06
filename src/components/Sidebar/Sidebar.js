@@ -30,7 +30,7 @@ const Sidebar = (props) => {
     return (
         <>
             <div id="sidebar" className={props.showSidebar ? 'visible' : null}>
-                <Link to={'/'}>Search</Link>
+                <Link to={'/search'}>Search</Link>
                 <button onClick={showModal}>Show Modal</button>
                 {props.lists.length === 0 ? <p>Add a list to see it here!</p> : 
                     <>

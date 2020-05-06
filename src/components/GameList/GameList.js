@@ -13,13 +13,10 @@ const GameList = (props) => {
         })[0]);
     }, [props.match, props.lists]);
 
-    useEffect(() => {
-        console.log(listData);
-    }, [listData]);
-
     return (
         <div>
             <h1>{listData.name}</h1>
+            {listData.contents.length === 0 ? <p>There are no games here! Search for games to start filling this list out!</p> : null}
             <ul id="game-list">
                 {[...listData.contents].map(item => {
                     return <GameListItem 
