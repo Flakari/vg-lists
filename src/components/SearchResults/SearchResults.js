@@ -9,6 +9,10 @@ const SearchResults = (props) => {
         setQuickAddSelection(e.target.value);
     };
 
+	useEffect(() => {
+        props.changeHighlight('');
+    }, [props]);
+
     useEffect(() => {
         setQuickAddOptions(props.lists.map(item => {
             return <option key={item.name} value={item.name}>{item.name}</option>
@@ -46,7 +50,6 @@ const SearchResults = (props) => {
 						})}
                     </ul>
                 </>)}
-            <footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>
         </>
     );
 };

@@ -8,6 +8,7 @@ import Header from './components/Header/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
+	const [currentPage, setCurrentPage] = useState(String(document.URL.match(/[^/]+(?=\/$|$)/)));
 	const [searchData, setSearchData] = useState('');
 	const [searchInput, setSearchInput] = useState('');
   	const [lists, setLists] = useState(
@@ -47,6 +48,10 @@ const App = () => {
 	useEffect(() => {
 		console.log(lists);
 	}, [lists]);
+
+	const changeHighlight = (value) => {
+        setCurrentPage(value);
+    }
 
 	const setListData = (lists) => {
 		if (window.localStorage && window.localStorage.getItem('lists')) {
@@ -275,11 +280,11 @@ const App = () => {
     	<div className="App">
 			<Router basename='/vg-lists'>
 				<Header setData={setData} setSidebar={setSidebarVisibility}/>
-				<Sidebar lists={lists} add={addNewList} delete={deleteList} copy={copyList} rename={renameList} merge={mergeLists} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList}/>
+				<Sidebar lists={lists} add={addNewList} delete={deleteList} copy={copyList} rename={renameList} merge={mergeLists} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList} currentPage={currentPage} changeHighlight={changeHighlight}/>
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">
-							<Home lists={lists}/>
+							<Home lists={lists} changeHighlight={changeHighlight}/>
 						</Route>
 						<Route path="/search">
 							<SearchResults 
@@ -292,10 +297,12 @@ const App = () => {
 								setInput={setInput}
 								setGames={setGamesList}
 								addGameInfo={addGameInformation}
+								changeHighlight={changeHighlight}
 							/>
 						</Route>
 						<Route path="/:name" render={(props) => <GameList changeItem={changeGameListItem} lists={lists} add={addGameToList} games={games} setGames={setGamesList} {...props} />} />
 					</Switch>
+					<footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>
 				</div>
 			</Router>
     	</div>

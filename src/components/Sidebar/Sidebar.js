@@ -20,12 +20,16 @@ const Sidebar = (props) => {
         setNavigation(props.lists.map(item => {
             const linkName = item.linkRoute;
             return (
-                <li key={item.name} onClick={props.hide}>
-                    <Link to={`/${linkName}`}>{`${item.name} [${item.contents.length}]`}</Link>
-                </li>
+                <Link to={`/${linkName}`} key={item.name} onClick={() => {props.hide(); props.changeHighlight(linkName)}}>
+                    <li
+                        className={props.currentPage === linkName ? 'active' : null}
+                    >
+                        {`${item.name} [${item.contents.length}]`}
+                    </li>
+                </Link>
             );
         }));
-    }, [props.lists, props.hide]);
+    }, [props.lists, props.hide, props.currentPage, props]);
 
     return (
         <>

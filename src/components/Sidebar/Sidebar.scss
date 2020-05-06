@@ -19,8 +19,29 @@
     ul {
         padding: 0;
 
+        a {
+            text-decoration: none;
+        }
+
         li {
             list-style-type: none;
+            padding: 5px;
+
+            &.active {
+                background-color: #ffa600;
+                color: #252525;
+                text-decoration: underline;
+
+                &:hover {
+                    background-color: #ffa600;
+                }
+            }
+
+            &:hover {
+                background-color: #805300;
+                cursor: pointer;
+                text-decoration: underline;
+            }
         }
     }
 
