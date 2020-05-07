@@ -22,9 +22,11 @@ const GameList = (props) => {
                     return <GameListItem 
                         key={item.name}
                         name={item.name}
+                        title={props.games[item.name].name}
                         index={item.index}
                         image={item['background-image']}
                         lists={props.lists}
+                        date={props.games[item.name].date}
                         games={props.games}
                         listName={listData.name}
                         listIndex={listData.index}

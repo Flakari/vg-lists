@@ -1,4 +1,5 @@
 @use './breakpoints.scss';
+@use './tile-search.scss';
 
 .App {
   text-align: center;
@@ -28,12 +29,13 @@ a {
 }
 
 #search-results > li, #game-list > li {
+  box-sizing: border-box;
   color: black;
   margin: 0 auto;
   margin-bottom: 10px;
-  width: 50%;
-  min-width: 250px;
-  max-width: 500px;
+  width: tile-search.$width;
+  min-width: tile-search.$minWidth;
+  max-width: tile-search.$maxWidth;
   padding: 10px 20px;
   list-style-type: none;
   background-color: lightgray;
@@ -41,9 +43,14 @@ a {
 }
 
 #search-results h2, #game-list h2 {
-  font-size: 1.2em;
+  font-size: 1.7em;
   text-align: left;
   margin: 0;
+}
+
+#search-results > li > p, #game-list > li > p {
+  text-align: left;
+  margin-top: 0;
 }
 
 #search-results select {
@@ -115,6 +122,12 @@ a {
 
 #search-results li .owned:hover {
   background-color: lightgreen;
+}
+
+footer {
+  background-color: #3b3b3b;
+  padding: 20px;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: breakpoints.$mobile) {

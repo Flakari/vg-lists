@@ -17,8 +17,6 @@ const SearchResult = (props) => {
 
     return (
         <ListItem {...props}>
-            <h2>{props.title}</h2>
-            <p>{props.date}</p>
             <select onChange={onChangeHandler}>
                 <option>---</option>
                 {options}
