@@ -16,7 +16,7 @@ a {
 #main-container {
   margin-left: 200px;
   padding-top: 15px;
-  background-color: #2f2f2f;
+  background-color: #313131;
   color: white;
 }
 
@@ -32,7 +32,7 @@ a {
   box-sizing: border-box;
   color: black;
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   width: tile-search.$width;
   min-width: tile-search.$minWidth;
   max-width: tile-search.$maxWidth;
@@ -48,9 +48,42 @@ a {
   margin: 0;
 }
 
-#search-results > li > p, #game-list > li > p {
+.list-item-header {
+  background-color: #252525;
+  color: #ffa600;
+  position: relative;
+  left: -20px;
+  padding: 10px 20px;
+  width: 100%;
+  top: -10px;
+  border-radius: 3px 3px 0 0;
+  display: grid;
+  grid-template-columns: minmax(200px, 500px) auto;
+  grid-column-gap: 10px;
+
+  button {
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    background-image: url(./images/Delete_icon.svg);
+    background: none;
+    border: none;
+    opacity: 0.3;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    img {
+      width: 26px;
+    }
+  }
+}
+
+#search-results > li .list-item-header p, #game-list > li .list-item-header p {
   text-align: left;
   margin-top: 0;
+  font-size: 0.9em;
 }
 
 #search-results select {

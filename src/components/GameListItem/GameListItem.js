@@ -37,8 +37,8 @@ const GameListItem = (props) => {
     );
 
     return (
-        <ListItem games={props.games} setGames={props.setGames} name={props.name} title={props.title} date={props.date} rating={props.rating} consoles={props.games[props.name].consoles} image={gameInfo.image}>   
-            <button onClick={() => { props.changeItem('delete', ...changeArgs); }}>Delete</button><br />
+        <ListItem games={props.games} setGames={props.setGames} name={props.name} title={props.title} date={props.date} rating={props.rating} consoles={props.games[props.name].consoles} image={gameInfo.image} delete={() => { props.changeItem('delete', ...changeArgs); }}>   
+            
             <button onClick={() => { props.changeItem('up', ...changeArgs); }}>Move Up</button><br />
             <button onClick={() => { props.changeItem('down', ...changeArgs); }}>Move Down</button><br />
             <button onClick={copyClickHandler}>{!copyInputVisible ? 'Copy To Other List' : 'Cancel'}</button>
