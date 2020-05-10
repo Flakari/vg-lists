@@ -1,0 +1,30 @@
+.consoles-list {
+    padding: 0;
+
+    li {
+        list-style-type: none;
+        font-size: 0.7em;
+        background-color: #4f4f4f;
+        display: inline-block;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding: 4px 10px;
+        border: 2px solid black;
+        box-sizing: border-box;
+        cursor: pointer;
+        border-radius: 5px;
+        color: white;
+
+        &:hover {
+            background-color: #808080;
+        }
+
+        &.owned {
+            background-color: #008000;
+
+            &:hover {
+                background-color: #90ee90;
+            }
+        }
+    }
+}

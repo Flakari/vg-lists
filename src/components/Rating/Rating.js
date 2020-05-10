@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Rating.scss';
 
 const Rating = (props) => {
     const [gameRating, setGameRating] = useState('-');

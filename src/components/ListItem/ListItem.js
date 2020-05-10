@@ -1,6 +1,7 @@
 import React from 'react';
 import Rating from '../Rating/Rating';
 import Consoles from '../Consoles/Consoles';
+import './ListItem.scss';
 
 const ListItem = (props) => {
     const monthName = [undefined, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Consoles.scss';
 
 const Consoles = (props) => {
     const [hasStoredData, setHasStoredData] = useState(props.games.hasOwnProperty(props.name));
