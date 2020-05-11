@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/vg-lists/static/css/main.3a066594.chunk.css",
+    "main.js": "/vg-lists/static/js/main.3ef7d3bb.chunk.js",
+    "main.js.map": "/vg-lists/static/js/main.3ef7d3bb.chunk.js.map",
+    "runtime-main.js": "/vg-lists/static/js/runtime-main.7477fb1d.js",
+    "runtime-main.js.map": "/vg-lists/static/js/runtime-main.7477fb1d.js.map",
+    "static/js/2.f246c082.chunk.js": "/vg-lists/static/js/2.f246c082.chunk.js",
+    "static/js/2.f246c082.chunk.js.map": "/vg-lists/static/js/2.f246c082.chunk.js.map",
+    "index.html": "/vg-lists/index.html",
+    "precache-manifest.dfa2c9b73c789a2d7797a8f2e94d41ec.js": "/vg-lists/precache-manifest.dfa2c9b73c789a2d7797a8f2e94d41ec.js",
+    "service-worker.js": "/vg-lists/service-worker.js",
+    "static/css/main.3a066594.chunk.css.map": "/vg-lists/static/css/main.3a066594.chunk.css.map",
+    "static/js/2.f246c082.chunk.js.LICENSE.txt": "/vg-lists/static/js/2.f246c082.chunk.js.LICENSE.txt",
+    "static/media/Delete_icon.svg": "/vg-lists/static/media/Delete_icon.6a12383b.svg",
+    "static/media/Hamburger_icon.svg": "/vg-lists/static/media/Hamburger_icon.54ebc46a.svg",
+    "static/media/magnifying-glass.svg": "/vg-lists/static/media/magnifying-glass.f8366a62.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7477fb1d.js",
+    "static/js/2.f246c082.chunk.js",
+    "static/css/main.3a066594.chunk.css",
+    "static/js/main.3ef7d3bb.chunk.js"
+  ]
+}
