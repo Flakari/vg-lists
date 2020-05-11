@@ -1,7 +1,15 @@
 @use './breakpoints.scss';
 
-.App {
+body {
+  background-color: #313131;
+}
+
+#root, .App {
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
   text-align: center;
+  min-width: 320px;
 }
 
 img {
@@ -13,9 +21,11 @@ a {
 }
 
 #main-container {
+  min-height: 100%;
   margin-left: 200px;
   padding-top: 15px;
-  background-color: #313131;
+  padding-bottom: 70px;
+  // background-color: #313131;
   color: white;
 
   h1 {
@@ -24,13 +34,28 @@ a {
 }
 
 footer {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 200px);
   background-color: #3b3b3b;
+  color: white;
   padding: 20px;
   margin-top: 20px;
+  margin-left: 200px;
+
+  a {
+    color: #ffa500;
+  }
 }
 
 @media screen and (min-width: breakpoints.$hi-def) {
   #main-container {
+    margin-left: 15vw;
+  }
+
+  footer {
+    width: calc(100% - 15vw);
     margin-left: 15vw;
   }
 }
@@ -38,5 +63,11 @@ footer {
 @media screen and (max-width: breakpoints.$mobile) {
   #main-container {
     margin-left: 0;
+  }
+
+  footer {
+    width: 100%;
+    margin-left: 0;
+    font-size: 0.95em;
   }
 }

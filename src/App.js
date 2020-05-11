@@ -302,8 +302,8 @@ const App = () => {
 						</Route>
 						<Route path="/:name" render={(props) => <GameList changeItem={changeGameListItem} lists={lists} add={addGameToList} games={games} setGames={setGamesList} {...props} />} />
 					</Switch>
-					<footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>
 				</div>
+				<footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>
 			</Router>
     	</div>
   	);
