@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './Home.scss';
 
 const Home = (props) => {
     useEffect(() => {
@@ -7,16 +8,15 @@ const Home = (props) => {
     }, [props]);
 
     return (
-        <div>
-            <h1>VG Lists</h1>
-            <p>Add video games to lists!</p>
-            <h2>Your Lists:</h2>
+        <div id='home-container'>
+            <h2>Add video games to lists!</h2>
+            <h3>Your Lists:</h3>
             <ul>
                 {props.lists.map(item => {
                     return (
-                        <li key={item.name}>
-                            <Link to={`/${item.linkRoute}`}>{item.name}</Link>
-                        </li>
+                        <Link to={`/${item.linkRoute}`} key={item.name}>
+                            <li>{item.name}</li>
+                        </Link>
                     );
                 })}
             </ul>

@@ -1,9 +1,31 @@
 .list-modal {
+    box-sizing: border-box;
+    position: relative;
     background-color: white;
-    padding: 20px;
+    padding: 20px 30px;
     border-radius: 5px;
     width: 90%;
     max-width: 600px;
+
+    #close-modal {
+        opacity: 0.3;
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        img {
+            width: 75%;
+        }
+    }
 }
 
 #modal-list-container {

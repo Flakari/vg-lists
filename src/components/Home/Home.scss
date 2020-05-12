@@ -1,0 +1,52 @@
+@use '../../tile-search.scss';
+@use '../../breakpoints.scss';
+
+#home-container {
+    h2 {
+        margin-top: 0;
+    }
+
+    ul {
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px 20px;
+        width: tile-search.$width;
+        max-width: tile-search.$maxWidth;
+        margin: 0 auto;
+
+        a {
+            background-color: #ffa500;
+            padding: 15px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #313131;
+            text-decoration: none;
+
+            li {
+                list-style-type: none;   
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    @media screen and (max-width: 675px) {
+        ul {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media screen and (max-width: breakpoints.$mobile) {
+        padding: 0 20px;
+
+        ul {
+            width: 75%;
+        }
+    }
+}

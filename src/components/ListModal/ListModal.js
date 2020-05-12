@@ -50,6 +50,7 @@ const ListModal = (props) => {
         <>
             <h1>List Manager</h1>
             <p>Add, delete, copy, reorganize, and even rename lists here! Your one stop shop for video game list management!</p>
+            <button id="close-modal" onClick={props.hideModal}><img src={require("../../images/Delete_icon_modal.svg")} alt={'Close modal'} /></button>
             <button onClick={addVisibility}>{showAdd ? 'Cancel' : 'Add List'}</button>
                 {showAdd ? addInput : null}
             <ul id='modal-list-container'>
