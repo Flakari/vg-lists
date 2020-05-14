@@ -36,8 +36,7 @@ const Rating = (props) => {
     };
 
     return (
-        <div>
-            <p>Rating: {gameRating || '-'}/5</p>
+        <div className="overall-rating-container">
             <div className='rating-container'>
             {[0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].map(item => {
                 return (
@@ -56,7 +55,7 @@ const Rating = (props) => {
             })}
             </div>
             <br />
-            <button onClick={() => {clickHandler(0)}}>Remove Rating</button>
+            <button onClick={() => {clickHandler(0)}}><img src={require('../../images/Delete_icon_rating.svg')} alt="Remove Rating" /></button>
         </div>
     );
 };

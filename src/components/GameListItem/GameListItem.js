@@ -31,18 +31,23 @@ const GameListItem = (props) => {
             <select onChange={onChangeHandler}>
                 <option>---</option>
                 {options}
-            </select>
+            </select><br />
             <button onClick={() => {props.add(props.name, selection); copyClickHandler();}}>Add</button>
         </>
     );
 
     return (
-        <ListItem games={props.games} setGames={props.setGames} name={props.name} title={props.title} date={props.date} rating={props.rating} consoles={props.games[props.name].consoles} image={gameInfo.image} delete={() => { props.changeItem('delete', ...changeArgs); }}>   
-            
-            <button onClick={() => { props.changeItem('up', ...changeArgs); }}>Move Up</button><br />
-            <button onClick={() => { props.changeItem('down', ...changeArgs); }}>Move Down</button><br />
-            <button onClick={copyClickHandler}>{!copyInputVisible ? 'Copy To Other List' : 'Cancel'}</button>
-            {copyInputVisible ? optionDisplay : null}
+        <ListItem games={props.games} setGames={props.setGames} name={props.name} title={props.title} date={props.date} rating={props.rating} consoles={props.games[props.name].consoles} image={gameInfo.image} delete={() => { props.changeItem('delete', ...changeArgs); }}>
+            <div className="alteration-container">
+                <div className="copy">
+                    <button onClick={copyClickHandler}>{!copyInputVisible ? 'Copy To Other List' : 'Cancel'}</button><br />
+                    {copyInputVisible ? optionDisplay : null}
+                </div>
+                <div className="move">
+                    <button onClick={() => { props.changeItem('up', ...changeArgs); }}><img src={require('../../images/Up_arrow.svg')} alt="Move List Up"/></button><br />
+                    <button onClick={() => { props.changeItem('down', ...changeArgs); }}><img src={require('../../images/Down_arrow.svg')} alt="Move List Down"/></button>
+                </div>
+            </div> 
         </ListItem>
     );
 };

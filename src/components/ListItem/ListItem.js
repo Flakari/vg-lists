@@ -8,9 +8,9 @@ const ListItem = (props) => {
     const [year, month, day] = props.date.split('-');
 
     const style = {
-        background: `linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.9)), url(${props.image})`,
+        background: `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4)), url(${props.image})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center 90px'
+        backgroundPosition: 'center 0px'
     }
 
     return (
@@ -22,7 +22,6 @@ const ListItem = (props) => {
                 </div>
                 {props.hasOwnProperty('delete') ? <button onClick={props.delete}><img alt="Delete game from list" src={require('../../images/Delete_icon.svg')}></img></button> : null}
             </div>
-            {props.children}
             <Rating
                 games={props.games}
                 setGames={props.setGames}
@@ -43,6 +42,7 @@ const ListItem = (props) => {
                 addGameInfo={props.addGameInfo}
                 image={props.image}
             />
+            {props.children}
         </li>
     )
 }

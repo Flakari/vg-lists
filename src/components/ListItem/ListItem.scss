@@ -30,7 +30,7 @@
     }
 
     .list-item-header {
-        background-color: #252525;
+        background-color: #252525d5;
         color: #ffa600;
         position: relative;
         left: -20px;
@@ -65,5 +65,36 @@
                 width: 26px;
             }
         }
-    } 
+    }
+
+    .alteration-container {
+        display: flex;
+        justify-content: space-evenly;
+        flex-flow: wrap;
+        min-height: 80px;
+
+        .copy {
+            width: 160px;
+            margin-bottom: 5px;
+        }
+
+        .move {
+            display: flex;
+            width: 160px;
+            justify-content: space-evenly;
+
+            button {
+                width: 60px;
+                height: 60px;
+                cursor: pointer;
+                background: none;
+                border: none;
+    
+                img {
+                    width: 85%;
+                }
+            }
+        }
+    }
+    
 }
