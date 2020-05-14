@@ -27,6 +27,8 @@
     select {
         width: 150px;
         text-overflow: ellipsis;
+        height: 30px;
+        padding: 5px;
     }
 
     .list-item-header {
@@ -74,7 +76,7 @@
         min-height: 80px;
 
         .copy {
-            width: 160px;
+            width: 250px;
             margin-bottom: 5px;
         }
 
@@ -96,5 +98,23 @@
             }
         }
     }
-    
+
+    .add-container {
+        margin: 10px 0;
+
+        button {
+            height: 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .add {
+            margin-bottom: 10px;
+
+            button {
+                margin-left: 5px;
+            }
+        }
+    }
 }

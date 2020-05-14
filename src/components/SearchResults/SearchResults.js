@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchResult from '../SearchResult/SearchResult';
+import './SearchResults.scss';
 
 const SearchResults = (props) => {
 	const [quickAddOptions, setQuickAddOptions] = useState([]);
@@ -21,8 +22,9 @@ const SearchResults = (props) => {
 
     return (
         <>
-			<p>Quick Add:</p>
-			<select onChange={onChangeHandler}>
+			<h1>Search</h1>
+			<label for="quick-add">Quick Add:</label>
+			<select id="quick-add" onChange={onChangeHandler}>
                 <option>---</option>
                 {quickAddOptions}
             </select>
