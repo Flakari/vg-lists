@@ -8,6 +8,9 @@ import Header from './components/Header/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
+	const [showImages, setShowImages] = useState(
+		window.localStorage && window.localStorage.getItem('showImages') ? 
+		JSON.parse(window.localStorage.getItem('showImages')) : true);
 	const [currentPage, setCurrentPage] = useState(String(document.URL.match(/[^/]+(?=\/$|$)/)));
 	const [searchData, setSearchData] = useState('');
 	const [searchInput, setSearchInput] = useState('');
@@ -39,6 +42,10 @@ const App = () => {
 		if (window.localStorage && !window.localStorage.getItem('games')) {
 			window.localStorage.setItem('games', JSON.stringify([]));
 		}
+
+		if (window.localStorage && !window.localStorage.getItem('showImages')) {
+			window.localStorage.setItem('showImages', JSON.stringify(true));
+		}
 	}, []);
 
 	useEffect(() => {
@@ -48,6 +55,15 @@ const App = () => {
 	useEffect(() => {
 		console.log(lists);
 	}, [lists]);
+
+	const showListImages = (value) => {
+		if (window.localStorage && window.localStorage.getItem('showImages')) {
+			window.localStorage.setItem('showImages', JSON.stringify(value));
+			setShowImages(JSON.parse(window.localStorage.getItem('showImages')));
+		} else {
+			setShowImages(value);
+		}
+	}
 
 	const changeHighlight = (value) => {
         setCurrentPage(value);
@@ -280,7 +296,21 @@ const App = () => {
     	<div className="App">
 			<Router basename='/vg-lists'>
 				<Header setData={setData} setSidebar={setSidebarVisibility}/>
-				<Sidebar lists={lists} add={addNewList} delete={deleteList} copy={copyList} rename={renameList} merge={mergeLists} showSidebar={showSidebar} hide={hideSidebar} moveList={moveList} currentPage={currentPage} changeHighlight={changeHighlight}/>
+				<Sidebar 
+					lists={lists}
+					add={addNewList}
+					delete={deleteList}
+					copy={copyList}
+					rename={renameList}
+					merge={mergeLists}
+					showSidebar={showSidebar}
+					hide={hideSidebar}
+					moveList={moveList}
+					currentPage={currentPage}
+					changeHighlight={changeHighlight}
+					showImages={showImages}
+					setShowImages={showListImages}
+				/>
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">
@@ -298,9 +328,23 @@ const App = () => {
 								setGames={setGamesList}
 								addGameInfo={addGameInformation}
 								changeHighlight={changeHighlight}
+								showImages={showImages}
 							/>
 						</Route>
-						<Route path="/:name" render={(props) => <GameList changeItem={changeGameListItem} lists={lists} add={addGameToList} games={games} setGames={setGamesList} {...props} />} />
+						<Route 
+							path="/:name"
+							render={(props) => (
+								<GameList 
+									changeItem={changeGameListItem}
+									lists={lists}
+									add={addGameToList}
+									games={games}
+									setGames={setGamesList}
+									showImages={showImages} 
+									{...props} 
+								/>
+							)}
+						/>
 					</Switch>
 				</div>
 				<footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>

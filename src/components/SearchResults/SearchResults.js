@@ -23,7 +23,7 @@ const SearchResults = (props) => {
     return (
         <>
 			<h1>Search</h1>
-			<label for="quick-add">Quick Add:</label>
+			<label htmlFor="quick-add">Quick Add:</label>
 			<select id="quick-add" onChange={onChangeHandler}>
                 <option>---</option>
                 {quickAddOptions}
@@ -47,6 +47,7 @@ const SearchResults = (props) => {
 									addGameInfo={props.addGameInfo}
 									image={item['background_image']}
 									quickAdd={quickAddSelection}
+									showImages={props.showImages}
 								/>
 							);
 						})}

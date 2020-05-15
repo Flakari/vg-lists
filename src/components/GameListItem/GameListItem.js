@@ -37,7 +37,7 @@ const GameListItem = (props) => {
     );
 
     return (
-        <ListItem games={props.games} setGames={props.setGames} name={props.name} title={props.title} date={props.date} rating={props.rating} consoles={props.games[props.name].consoles} image={gameInfo.image} delete={() => { props.changeItem('delete', ...changeArgs); }}>
+        <ListItem games={props.games} setGames={props.setGames} name={props.name} title={props.title} date={props.date} rating={props.rating} consoles={props.games[props.name].consoles} image={gameInfo.image} delete={() => { props.changeItem('delete', ...changeArgs); }} showImages={props.showImages} >
             <div className="alteration-container">
                 <div className="copy">
                     <button onClick={copyClickHandler}>{!copyInputVisible ? 'Copy To Other List' : 'Cancel'}</button><br />

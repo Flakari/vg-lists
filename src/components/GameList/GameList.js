@@ -33,6 +33,7 @@ const GameList = (props) => {
                         changeItem={props.changeItem}
                         add={props.add}
                         setGames={props.setGames}
+                        showImages={props.showImages}
                     />
                 })}
             </ul>

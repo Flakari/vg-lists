@@ -45,6 +45,11 @@ const Sidebar = (props) => {
                         </nav> 
                     </>
                 }
+                <div id="show-images">
+                    <div id="toggle">
+                        <button onClick={() => props.setShowImages(!props.showImages)}>Show Images?</button>
+                    </div>
+                </div>
             </div>
             {showListModal ? (
                 <Modal modalClass={'list-modal'} showModal={showListModal} hideModal={hideModal}>

@@ -28,7 +28,7 @@ a {
   padding-bottom: 70px;
   color: white;
 
-  h1, p {
+  h1, > p {
     width: tile-search.$width;
     max-width: tile-search.$maxWidth;
     min-width: tile-search.$minWidth;
