@@ -4,6 +4,7 @@ import './ListModal.scss';
 import Modal from '../Modal/Modal';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import ListModalItem from '../ListModalItem/ListModalItem';
+import TextInput from '../TextInput/TextInput';
 
 const ListModal = (props) => {
     const [addValue, setAddValue] = useState('');
@@ -53,6 +54,7 @@ const ListModal = (props) => {
             <button id="close-modal" onClick={props.hideModal}><img src={require("../../images/Delete_icon_modal.svg")} alt={'Close modal'} /></button>
             <button onClick={addVisibility}>{showAdd ? 'Cancel' : 'Add List'}</button>
                 {showAdd ? addInput : null}
+            <TextInput />
             <ul id='modal-list-container'>
                 {props.lists.map(item => {
                     return (
