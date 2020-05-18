@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const TextInput = (props) => {
     const [showInput, setShowInput] = useState(false);
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(props.standardInput !== undefined ? props.standardInput : '');
     const [validInput, setValidInput] = useState(true);
 
     const changeHandler = (e) => {
@@ -15,12 +15,17 @@ const TextInput = (props) => {
         }
     };
 
-    const submit = () => {
+    const submit = (args) => {
         if (!validInput) { return }
 
         setShowInput(false);
         setValue('');
-        console.log(value);
+
+        if (args !== undefined) {
+            props.inputFunction(value, args);
+        } else {
+            props.inputFunction(value);
+        }
     }
 
     const inputVisibility = () => {
@@ -28,16 +33,16 @@ const TextInput = (props) => {
     };
 
     const input = (
-        <form onSubmit={e => { e.preventDefault(); submit(); }}>
-            <input type="text" value={value} onChange={changeHandler} autoFocus></input>
+        <form onSubmit={e => { e.preventDefault(); submit(props.args); }}>
+            <input id={props.id} type="text" value={value} onChange={changeHandler} autoFocus></input>
+            {validInput ? <p>Valid Input</p> : <p>Invalid Input</p>}
             <input type="submit" value="Submit"></input>
         </form>
     );
     return (
         <>
-            <button onClick={inputVisibility}>{showInput ? 'Cancel' : 'Console Log'}</button>
+            <button onClick={inputVisibility}>{showInput ? 'Cancel' : props.text}</button>
             {showInput ? input : null}
-            {validInput ? <p>Valid Input</p> : <p>Invalid Input</p>}
         </>
     );
 };

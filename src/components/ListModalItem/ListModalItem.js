@@ -2,32 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Modal from '../Modal/Modal';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal'; 
 import { withRouter } from 'react-router-dom';
+import TextInput from '../TextInput/TextInput';
 
 const ListModalItem = (props) => {
-    const [copyValue, setCopyValue] = useState('');
-    const [showCopy, setShowCopy] = useState(false);
-    const [renameValue, setRenameValue] = useState('');
-    const [showRename, setShowRename] = useState(false);
     const [mergeInputVisible, setMergeInputVisible] = useState(false);
     const [mergeOptions, setMergeOptions] = useState([]);
     const [mergeSelection, setMergeSelection] = useState('');
     const [showMerge, setShowMerge] = useState(false);
-
-    const copyChangeHandler = (input) => {
-        setCopyValue(input.target.value);
-    };
-
-    const copyVisibility = () => {
-        setShowCopy(!showCopy);
-    };
-
-    const renameChangeHandler = (input) => {
-        setRenameValue(input.target.value);
-    };
-
-    const renameVisibility = () => {
-        setShowRename(!showRename);
-    };
 
     const renameList = (name, index) => {
         if (String(document.URL.match(/[^/]+(?=\/$|$)/)) === props.lists[index].linkRoute) {
@@ -35,20 +16,6 @@ const ListModalItem = (props) => {
         }
         props.rename(name, index);
     }
-
-    const copyInput = (
-        <form onSubmit={e => { e.preventDefault(); props.copy(copyValue, props.contents); setShowCopy(false); setCopyValue('')}}>
-            <input id="list-copy-input" type="text" value={copyValue} onChange={copyChangeHandler} autoFocus></input>
-            <input type="submit" value="Submit"></input>
-        </form>
-    );
-
-    const renameInput = (
-        <form onSubmit={e => { e.preventDefault(); renameList(renameValue, props.index); setShowRename(false); setRenameValue('')}}>
-            <input id="list-rename-input" type="text" value={renameValue} onChange={renameChangeHandler} autoFocus></input>
-            <input type="submit" value="Submit"></input>
-        </form>
-    );
 
     const onChangeHandler = (e) => {
         setMergeSelection(e.target.value);
@@ -94,10 +61,19 @@ const ListModalItem = (props) => {
                     <button onClick={() => { props.deleteIndex(props.index); props.showDelete(); }}>Delete List</button>
                     <button onClick={() => props.moveList('up', props.index)}>Move Up</button>
                     <button onClick={() => props.moveList('down', props.index)}>Move Down</button>
-                    <button onClick={copyVisibility}>{showCopy ? 'Cancel' : 'Copy List'}</button>
-                    {showCopy ? copyInput : null}
-                    <button onClick={renameVisibility}>{showRename ? 'Cancel' : 'Rename List'}</button>
-                    {showRename ? renameInput : null}
+                    <TextInput
+                        id='list-copy-input'
+                        text='Copy List'
+                        inputFunction={props.copy}
+                        args={props.contents}
+                    />
+                    <TextInput
+                        id='list-rename-input'
+                        text='Rename List'
+                        inputFunction={renameList}
+                        args={props.index}
+                        standardInput={props.name}
+                    />
                     <button onClick={mergeClickHandler}>{mergeInputVisible ? 'Cancel' : 'Merge Into'}</button>
                     {mergeInputVisible ? optionDisplay : null}
                 </div>

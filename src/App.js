@@ -198,10 +198,6 @@ const App = () => {
 	const createNewList = (name, contents) => {
 		const trimmedName = name.trim();
 
-		if (trimmedName.indexOf('/') !== -1 || trimmedName.indexOf('\\') !== -1) {
-			throw new Error('Name cannot include forward or backwards slashes ("/") ("\\")');
-		}
-
 		return ({
 			name: trimmedName,
 			linkRoute: trimmedName.toLowerCase().split(' ').join('-'),
@@ -249,10 +245,6 @@ const App = () => {
 
 		if (trimmedName === '') {
 			return;
-		}
-
-		if (trimmedName.indexOf('/') !== -1 || trimmedName.indexOf('\\') !== -1) {
-			throw new Error('Name cannot include forward or backwards slashes ("/") ("\\")');
 		}
 
 		const newLists = [...lists];

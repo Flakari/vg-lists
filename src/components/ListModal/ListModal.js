@@ -7,18 +7,8 @@ import ListModalItem from '../ListModalItem/ListModalItem';
 import TextInput from '../TextInput/TextInput';
 
 const ListModal = (props) => {
-    const [addValue, setAddValue] = useState('');
-    const [showAdd, setShowAdd] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(0);
-    
-    const addChangeHandler = (input) => {
-        setAddValue(input.target.value);
-    };
-
-    const addVisibility = () => {
-        setShowAdd(!showAdd);
-    };
 
     const changeDeleteIndex = (index) => {
         setDeleteIndex(index);
@@ -40,21 +30,16 @@ const ListModal = (props) => {
         hideDeleteConfirmation();
     };
 
-    const addInput = (
-        <form onSubmit={e => { e.preventDefault(); props.add(addValue); setShowAdd(false); setAddValue('')}}>
-            <input id="list-input" type="text" value={addValue} onChange={addChangeHandler} autoFocus></input>
-            <input type="submit" value="Submit"></input>
-        </form>
-    );
-
     return (
         <>
             <h1>List Manager</h1>
             <p>Add, delete, copy, reorganize, and even rename lists here! Your one stop shop for video game list management!</p>
             <button id="close-modal" onClick={props.hideModal}><img src={require("../../images/Delete_icon_modal.svg")} alt={'Close modal'} /></button>
-            <button onClick={addVisibility}>{showAdd ? 'Cancel' : 'Add List'}</button>
-                {showAdd ? addInput : null}
-            <TextInput />
+            <TextInput
+                id='add-list'
+                text='Add List'
+                inputFunction={props.add}
+            />
             <ul id='modal-list-container'>
                 {props.lists.map(item => {
                     return (
