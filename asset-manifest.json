@@ -1,29 +1,30 @@
 {
   "files": {
-    "main.css": "/vg-lists/static/css/main.127ee21f.chunk.css",
-    "main.js": "/vg-lists/static/js/main.d29d65b3.chunk.js",
-    "main.js.map": "/vg-lists/static/js/main.d29d65b3.chunk.js.map",
+    "main.css": "/vg-lists/static/css/main.e0817bca.chunk.css",
+    "main.js": "/vg-lists/static/js/main.1944cb14.chunk.js",
+    "main.js.map": "/vg-lists/static/js/main.1944cb14.chunk.js.map",
     "runtime-main.js": "/vg-lists/static/js/runtime-main.7477fb1d.js",
     "runtime-main.js.map": "/vg-lists/static/js/runtime-main.7477fb1d.js.map",
-    "static/js/2.d41203f2.chunk.js": "/vg-lists/static/js/2.d41203f2.chunk.js",
-    "static/js/2.d41203f2.chunk.js.map": "/vg-lists/static/js/2.d41203f2.chunk.js.map",
+    "static/js/2.32077f4c.chunk.js": "/vg-lists/static/js/2.32077f4c.chunk.js",
+    "static/js/2.32077f4c.chunk.js.map": "/vg-lists/static/js/2.32077f4c.chunk.js.map",
     "index.html": "/vg-lists/index.html",
-    "precache-manifest.7f294340a7adec6e0f1865fcbc77fc47.js": "/vg-lists/precache-manifest.7f294340a7adec6e0f1865fcbc77fc47.js",
+    "precache-manifest.82b98196151ff596de7f06c0d9dac42c.js": "/vg-lists/precache-manifest.82b98196151ff596de7f06c0d9dac42c.js",
     "service-worker.js": "/vg-lists/service-worker.js",
-    "static/css/main.127ee21f.chunk.css.map": "/vg-lists/static/css/main.127ee21f.chunk.css.map",
-    "static/js/2.d41203f2.chunk.js.LICENSE.txt": "/vg-lists/static/js/2.d41203f2.chunk.js.LICENSE.txt",
+    "static/css/main.e0817bca.chunk.css.map": "/vg-lists/static/css/main.e0817bca.chunk.css.map",
+    "static/js/2.32077f4c.chunk.js.LICENSE.txt": "/vg-lists/static/js/2.32077f4c.chunk.js.LICENSE.txt",
     "static/media/Delete_icon.svg": "/vg-lists/static/media/Delete_icon.6a12383b.svg",
     "static/media/Delete_icon_modal.svg": "/vg-lists/static/media/Delete_icon_modal.ed50bad7.svg",
     "static/media/Delete_icon_rating.svg": "/vg-lists/static/media/Delete_icon_rating.cbf5b388.svg",
     "static/media/Down_arrow.svg": "/vg-lists/static/media/Down_arrow.d372ff1d.svg",
     "static/media/Hamburger_icon.svg": "/vg-lists/static/media/Hamburger_icon.54ebc46a.svg",
     "static/media/Up_arrow.svg": "/vg-lists/static/media/Up_arrow.875f7af6.svg",
+    "static/media/gear.svg": "/vg-lists/static/media/gear.dc461297.svg",
     "static/media/magnifying-glass.svg": "/vg-lists/static/media/magnifying-glass.f8366a62.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.7477fb1d.js",
-    "static/js/2.d41203f2.chunk.js",
-    "static/css/main.127ee21f.chunk.css",
-    "static/js/main.d29d65b3.chunk.js"
+    "static/js/2.32077f4c.chunk.js",
+    "static/css/main.e0817bca.chunk.css",
+    "static/js/main.1944cb14.chunk.js"
   ]
 }
