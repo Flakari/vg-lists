@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "800fed38323b040520cab757715f2f42",
+    "revision": "3028bc2a89995b17b68676d24e7fa570",
     "url": "/vg-lists/index.html"
   },
   {
-    "revision": "5c1676f2aa0a57b3cced",
-    "url": "/vg-lists/static/css/main.f0ab5c9a.chunk.css"
+    "revision": "21224b25f946abb742b7",
+    "url": "/vg-lists/static/css/main.3fc9aeb7.chunk.css"
   },
   {
     "revision": "ec0d78747bcaeff30ebe",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vg-lists/static/js/2.32077f4c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5c1676f2aa0a57b3cced",
-    "url": "/vg-lists/static/js/main.1944cb14.chunk.js"
+    "revision": "21224b25f946abb742b7",
+    "url": "/vg-lists/static/js/main.9140bf6b.chunk.js"
   },
   {
     "revision": "74ddd1073a0952b4b209",
@@ -36,16 +36,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vg-lists/static/media/Delete_icon_rating.cbf5b388.svg"
   },
   {
-    "revision": "d372ff1d8af555cdb32a1ea68093f528",
-    "url": "/vg-lists/static/media/Down_arrow.d372ff1d.svg"
+    "revision": "08cc8dc14f44f5414d4a8e4ebffa71d4",
+    "url": "/vg-lists/static/media/Down_arrow.08cc8dc1.svg"
   },
   {
     "revision": "54ebc46aeaef815529e319569026e361",
     "url": "/vg-lists/static/media/Hamburger_icon.54ebc46a.svg"
   },
   {
-    "revision": "875f7af6c7e9db37cab6aa31bb097a2c",
-    "url": "/vg-lists/static/media/Up_arrow.875f7af6.svg"
+    "revision": "3494b1fd16dc91a7c1184249ade479d4",
+    "url": "/vg-lists/static/media/Up_arrow.3494b1fd.svg"
   },
   {
     "revision": "dc46129755c87e1f3ccd617253a206e1",
