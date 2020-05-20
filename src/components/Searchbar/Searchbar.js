@@ -5,7 +5,6 @@ const Searchbar = (props) => {
     const [input, setInput] = useState('');
 
     const searchSubmitHandler = () => {
-		console.log(input.split(' ').join('-'));
 		fetch(`https://api.rawg.io/api/games?search=${input.split(' ').join('-')}`, {
 				"method": "GET",
 				"headers": {
@@ -19,7 +18,6 @@ const Searchbar = (props) => {
 			return response.json();
 		})
 		.then(response => {
-			console.log(response.results);
 			props.setData(response.results);
 			if (props.hasOwnProperty('toggleSearch')) props.toggleSearch();
 		})

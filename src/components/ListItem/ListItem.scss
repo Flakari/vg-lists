@@ -47,6 +47,8 @@
         p {
             text-align: left;
             margin-top: 0;
+            margin-left: 0;
+            margin-right: 0;
             font-size: 0.9em;
         }
 
@@ -136,6 +138,8 @@
         button {
             cursor: pointer;
             padding: 0 10px;
+            height: 30px;
+            border-radius: 5px;
         }
 
         .add {

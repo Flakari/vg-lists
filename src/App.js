@@ -48,14 +48,6 @@ const App = () => {
 		}
 	}, []);
 
-	useEffect(() => {
-		console.log(games);
-	}, [games]);
-
-	useEffect(() => {
-		console.log(lists);
-	}, [lists]);
-
 	const showListImages = (value) => {
 		if (window.localStorage && window.localStorage.getItem('showImages')) {
 			window.localStorage.setItem('showImages', JSON.stringify(value));

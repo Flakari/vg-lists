@@ -7,7 +7,6 @@ const GameList = (props) => {
     })[0]);
 
     useEffect(() => {
-        console.log(props.match);
         setListData(props.lists.filter(item => {
             return item.linkRoute === props.match.params.name;
         })[0]);
