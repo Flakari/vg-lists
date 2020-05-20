@@ -34,16 +34,16 @@ const TextInput = (props) => {
 
     const input = (
         <form onSubmit={e => { e.preventDefault(); submit(props.args); }}>
-            <input id={props.id} type="text" value={value} onChange={changeHandler} autoFocus></input>
-            {validInput ? <p>Valid Input</p> : <p>Invalid Input</p>}
+            <input className={!validInput && 'invalid'} id={props.id} type="text" value={value} onChange={changeHandler} autoFocus></input>
             <input type="submit" value="Submit"></input>
+            {validInput ? null : <p class="invalid-text">Invalid Input: Cannot use / or \ in list name!</p>}
         </form>
     );
     return (
-        <>
+        <div>
             <button onClick={inputVisibility}>{showInput ? 'Cancel' : props.text}</button>
             {showInput ? input : null}
-        </>
+        </div>
     );
 };
 

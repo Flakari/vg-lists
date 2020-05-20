@@ -27,13 +27,13 @@ const GameListItem = (props) => {
     }, [props.lists, props.listName]);
 
     const optionDisplay = (
-        <>
+        <div>
             <select onChange={onChangeHandler}>
                 <option>---</option>
                 {options}
             </select>
-            <button onClick={() => {props.add(props.name, selection); copyClickHandler();}}>Add</button>
-        </>
+            <button className="add-button" onClick={() => {props.add(props.name, selection); copyClickHandler();}}>Add</button>
+        </div>
     );
 
     return (

@@ -2,6 +2,9 @@
     background-color: white;
     border-radius: 5px;
     padding: 20px;
+    box-sizing: border-box;
+    width: 80%;
+    max-width: 450px;
 
     p {
         font-weight: bold;
@@ -14,11 +17,10 @@
         width: 150px;
 
         button {
-            height: 40px;
-            width: 65px;
-            cursor: pointer;
+            height: 30px;
             border-radius: 5px;
+            padding: 0 20px;
+            cursor: pointer;
         }
     }
-    
 }

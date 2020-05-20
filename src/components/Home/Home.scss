@@ -16,6 +16,7 @@
         width: tile-search.$width;
         max-width: tile-search.$maxWidth;
         margin: 0 auto;
+        margin-bottom: 20px;
 
         a {
             background-color: #ffa500;
@@ -36,6 +37,15 @@
                 text-decoration: underline;
             }
         }
+    }
+
+    hr {
+        width: 75%;
+    }
+
+    #image-note {
+        font-size: 0.8em;
+        margin: 20px 2.5em;
     }
 
     @media screen and (max-width: 675px) {

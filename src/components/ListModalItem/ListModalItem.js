@@ -48,7 +48,7 @@ const ListModalItem = (props) => {
             <select onChange={onChangeHandler}>
                 <option>---</option>
                 {mergeOptions}
-            </select>
+            </select><br />
             <button onClick={() => { showMergeConfirmation(); mergeClickHandler(); }}>Merge</button>
         </>
     );
@@ -56,8 +56,8 @@ const ListModalItem = (props) => {
     return (
         <>
             <li key={props.name} className='modal-list-item'>
-                <div>
-                    <h2>{props.name}</h2>
+                <h2>{props.name}</h2>
+                <div className="list-button-container">
                     <button onClick={() => { props.deleteIndex(props.index); props.showDelete(); }}>Delete List</button>
                     <button onClick={() => props.moveList('up', props.index)}>Move Up</button>
                     <button onClick={() => props.moveList('down', props.index)}>Move Down</button>
@@ -74,8 +74,10 @@ const ListModalItem = (props) => {
                         args={props.index}
                         standardInput={props.name}
                     />
-                    <button onClick={mergeClickHandler}>{mergeInputVisible ? 'Cancel' : 'Merge Into'}</button>
-                    {mergeInputVisible ? optionDisplay : null}
+                    <div>
+                        <button onClick={mergeClickHandler}>{mergeInputVisible ? 'Cancel' : 'Merge Into'}</button><br />
+                        {mergeInputVisible ? optionDisplay : null}
+                    </div>
                 </div>
             </li>
             <Modal modalClass={'merge-list'} showModal={showMerge} hideModal={hideMergeConfirmation}>

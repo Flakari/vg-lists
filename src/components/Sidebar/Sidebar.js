@@ -34,6 +34,9 @@ const Sidebar = (props) => {
     return (
         <>
             <div id="sidebar" className={props.showSidebar ? 'visible' : null}>
+                <div id="manage-lists" onClick={showModal}>
+                    <img src={require('../../images/gear.svg')} alt="" /><p>Manage Lists</p>
+                </div>
                 <h2>Your Lists:</h2>
                 {props.lists.length === 0 ? <p>Add a list to see it here!</p> : 
                     <>
@@ -44,9 +47,6 @@ const Sidebar = (props) => {
                         </nav> 
                     </>
                 }
-                <div id="manage-lists" onClick={showModal}>
-                    <img src={require('../../images/gear.svg')} alt="" /><p>Manage Lists</p>
-                </div>
                 <div id="show-images">
                     <p>Toggle Tile Images:</p>
                     <div id="toggle" onClick={() => props.setShowImages(!props.showImages)} className={props.showImages ? 'on' : 'off'}>
