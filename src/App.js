@@ -7,38 +7,34 @@ import GameList from './components/GameList/GameList';
 import Header from './components/Header/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+const defaultLists = [
+	{ name: 'Owned', linkRoute: 'owned', contents: [], index: 0 },
+	{ name: 'Completed', linkRoute: 'completed', contents: [], index: 1 },
+	{ name: 'Currently Playing', linkRoute: 'currently-playing', contents: [], index: 2 },
+	{ name: 'Wishlist', linkRoute: 'wishlist', contents: [], index: 3 },
+	{ name: 'Backlog', linkRoute: 'backlog', contents: [], index: 4 }
+];
+
 const App = () => {
 	const [showImages, setShowImages] = useState(
-		window.localStorage && window.localStorage.getItem('showImages') ? 
-		JSON.parse(window.localStorage.getItem('showImages')) : true);
+		window.localStorage && window.localStorage.getItem('showImages') ?
+			JSON.parse(window.localStorage.getItem('showImages')) : true);
 	const [currentPage, setCurrentPage] = useState(String(document.URL.match(/[^/]+(?=\/$|$)/)));
 	const [searchData, setSearchData] = useState('');
 	const [searchInput, setSearchInput] = useState('');
-  	const [lists, setLists] = useState(
-		window.localStorage && window.localStorage.getItem('lists') ? 
-		JSON.parse(window.localStorage.getItem('lists')) : [
-			{ name: 'Owned', linkRoute: 'owned', contents: [], index: 0 },
-			{ name: 'Completed', linkRoute: 'completed', contents: [], index: 1 },
-			{ name: 'Currently Playing', linkRoute: 'currently-playing', contents: [], index: 2 },
-			{ name: 'Wishlist', linkRoute: 'wishlist', contents: [], index: 3 },
-			{ name: 'Backlog', linkRoute: 'backlog', contents: [], index: 4 }
-		]);
+	const [lists, setLists] = useState(
+		window.localStorage && window.localStorage.getItem('lists') ?
+			JSON.parse(window.localStorage.getItem('lists')) : defaultLists);
 	const [games, setGames] = useState(
-		window.localStorage && window.localStorage.getItem('games') ? 
-		JSON.parse(window.localStorage.getItem('games')) : {});
+		window.localStorage && window.localStorage.getItem('games') ?
+			JSON.parse(window.localStorage.getItem('games')) : {});
 	const [showSidebar, setShowSidebar] = useState(false);
 
 	useEffect(() => {
 		if (window.localStorage && !window.localStorage.getItem('lists')) {
-			window.localStorage.setItem('lists', JSON.stringify([
-				{ name: 'Owned', linkRoute: 'owned', contents: [], index: 0 },
-				{ name: 'Completed', linkRoute: 'completed', contents: [], index: 1 },
-				{ name: 'Currently Playing', linkRoute: 'currently-playing', contents: [], index: 2 },
-				{ name: 'Wishlist', linkRoute: 'wishlist', contents: [], index: 3 },
-				{ name: 'Backlog', linkRoute: 'backlog', contents: [], index: 4 }
-			]));
+			window.localStorage.setItem('lists', JSON.stringify(defaultLists));
 		}
-		
+
 		if (window.localStorage && !window.localStorage.getItem('games')) {
 			window.localStorage.setItem('games', JSON.stringify([]));
 		}
@@ -58,8 +54,8 @@ const App = () => {
 	}
 
 	const changeHighlight = (value) => {
-        setCurrentPage(value);
-    }
+		setCurrentPage(value);
+	}
 
 	const setListData = (lists) => {
 		if (window.localStorage && window.localStorage.getItem('lists')) {
@@ -71,8 +67,8 @@ const App = () => {
 	};
 
 	const setData = (data) => {
-    	setSearchData(data);
-    };
+		setSearchData(data);
+	};
 
 	const setInput = (input) => {
 		setSearchInput(input);
@@ -106,10 +102,10 @@ const App = () => {
 				});
 
 				if (gameList.indexOf(gameName) === -1) {
-					newLists[i].contents.push({name: gameName, index: newLists[i].contents.length});
+					newLists[i].contents.push({ name: gameName, index: newLists[i].contents.length });
 					setListData(newLists);
 				}
-			} 
+			}
 		}
 	};
 
@@ -123,7 +119,7 @@ const App = () => {
 				owned: item.hasOwnProperty('owned') ? item.owned : false
 			});
 		});
-		
+
 		if (newGames[gameName] === undefined) {
 			newGames[gameName] = {
 				name: gameTitle,
@@ -169,13 +165,13 @@ const App = () => {
 		let newLists = JSON.parse(JSON.stringify(lists));
 		const changingList = newLists.splice(index, 1)[0];
 		newLists = moveItem(direction, newLists, changingList, index);
-		
+
 		for (let i = 0; i < newLists.length; i++) {
 			newLists[i].index = i;
 		}
 		setListData(newLists);
 	};
-	
+
 	const moveItem = (direction, list, item, index) => {
 		if (direction === 'up' && index > 0) {
 			list.splice(index - 1, 0, item);
@@ -220,7 +216,7 @@ const App = () => {
 	const deleteList = (index) => {
 		const newLists = [...lists];
 		newLists.splice(index, 1);
-		
+
 		for (let i = 0; i < newLists.length; i++) {
 			newLists[i].index = i;
 		}
@@ -276,11 +272,11 @@ const App = () => {
 		setListData(newLists);
 	};
 
-  	return (
-    	<div className="App">
+	return (
+		<div className="App">
 			<Router basename='/vg-lists'>
-				<Header setData={setData} setSidebar={setSidebarVisibility}/>
-				<Sidebar 
+				<Header setData={setData} setSidebar={setSidebarVisibility} />
+				<Sidebar
 					lists={lists}
 					add={addNewList}
 					delete={deleteList}
@@ -298,14 +294,14 @@ const App = () => {
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">
-							<Home lists={lists} changeHighlight={changeHighlight}/>
+							<Home lists={lists} changeHighlight={changeHighlight} />
 						</Route>
 						<Route path="/search">
-							<SearchResults 
+							<SearchResults
 								lists={lists}
 								games={games}
-								add={addGameToList} 
-								data={searchData} 
+								add={addGameToList}
+								data={searchData}
 								setData={setData}
 								searchInput={searchInput}
 								setInput={setInput}
@@ -315,17 +311,17 @@ const App = () => {
 								showImages={showImages}
 							/>
 						</Route>
-						<Route 
+						<Route
 							path="/:name"
 							render={(props) => (
-								<GameList 
+								<GameList
 									changeItem={changeGameListItem}
 									lists={lists}
 									add={addGameToList}
 									games={games}
 									setGames={setGamesList}
-									showImages={showImages} 
-									{...props} 
+									showImages={showImages}
+									{...props}
 								/>
 							)}
 						/>
@@ -333,8 +329,8 @@ const App = () => {
 				</div>
 				<footer>All data gathered from RAWG - <a href="https://www.rawg.io" target="_blank" rel="noopener noreferrer">RAWG.io</a></footer>
 			</Router>
-    	</div>
-  	);
+		</div>
+	);
 };
 
 export default App;
