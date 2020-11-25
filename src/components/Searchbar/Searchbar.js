@@ -18,7 +18,6 @@ const Searchbar = (props) => {
 				return response.json();
 			})
 			.then(response => {
-				console.log(response.results.map(item => item.released));
 				props.setData(response.results);
 				if (props.hasOwnProperty('toggleSearch')) props.toggleSearch();
 			})

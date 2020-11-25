@@ -15,56 +15,65 @@ const defaultLists = [
 	{ name: 'Backlog', linkRoute: 'backlog', contents: [], index: 4 }
 ];
 
+const checkLocalStorage = (storageName, noItem = false) => {
+	return (
+		noItem ? window.localStorage && !window.localStorage.getItem(storageName) :
+			window.localStorage && window.localStorage.getItem(storageName)
+	);
+}
+
+const initializeLocalStorageState = (storageName, defaultValue) => {
+	return checkLocalStorage(storageName) ?
+		JSON.parse(window.localStorage.getItem(storageName)) : defaultValue;
+}
+
 const App = () => {
-	const [showImages, setShowImages] = useState(
-		window.localStorage && window.localStorage.getItem('showImages') ?
-			JSON.parse(window.localStorage.getItem('showImages')) : true);
 	const [currentPage, setCurrentPage] = useState(String(document.URL.match(/[^/]+(?=\/$|$)/)));
 	const [searchData, setSearchData] = useState('');
 	const [searchInput, setSearchInput] = useState('');
-	const [lists, setLists] = useState(
-		window.localStorage && window.localStorage.getItem('lists') ?
-			JSON.parse(window.localStorage.getItem('lists')) : defaultLists);
-	const [games, setGames] = useState(
-		window.localStorage && window.localStorage.getItem('games') ?
-			JSON.parse(window.localStorage.getItem('games')) : {});
+	const [showImages, setShowImages] = useState(initializeLocalStorageState('showImages', true));
+	const [lists, setLists] = useState(initializeLocalStorageState('lists', defaultLists));
+	const [games, setGames] = useState(initializeLocalStorageState('games', {}));
 	const [showSidebar, setShowSidebar] = useState(false);
 
 	useEffect(() => {
-		if (window.localStorage && !window.localStorage.getItem('lists')) {
+		if (checkLocalStorage('lists', true)) {
 			window.localStorage.setItem('lists', JSON.stringify(defaultLists));
 		}
 
-		if (window.localStorage && !window.localStorage.getItem('games')) {
+		if (checkLocalStorage('games', true)) {
 			window.localStorage.setItem('games', JSON.stringify([]));
 		}
 
-		if (window.localStorage && !window.localStorage.getItem('showImages')) {
+		if (checkLocalStorage('showImages', true)) {
 			window.localStorage.setItem('showImages', JSON.stringify(true));
 		}
 	}, []);
 
-	const showListImages = (value) => {
-		if (window.localStorage && window.localStorage.getItem('showImages')) {
-			window.localStorage.setItem('showImages', JSON.stringify(value));
-			setShowImages(JSON.parse(window.localStorage.getItem('showImages')));
+	const setLocalStorageData = (value, lsString, setState) => {
+		if (checkLocalStorage(lsString)) {
+			window.localStorage.setItem(lsString, JSON.stringify(value));
+			setState(JSON.parse(window.localStorage.getItem(lsString)));
 		} else {
-			setShowImages(value);
+			setState(value);
 		}
 	}
+
+	const showListImages = (value) => {
+		setLocalStorageData(value, 'showImages', setShowImages);
+	}
+
+	const setListData = (value) => {
+		setLocalStorageData(value, 'lists', setLists);
+	};
+
+	const setGamesList = (value) => {
+		setLocalStorageData(value, 'games', setGames);
+	};
 
 	const changeHighlight = (value) => {
 		setCurrentPage(value);
 	}
-
-	const setListData = (lists) => {
-		if (window.localStorage && window.localStorage.getItem('lists')) {
-			window.localStorage.setItem('lists', JSON.stringify(lists));
-			setLists(JSON.parse(window.localStorage.getItem('lists')));
-		} else {
-			setLists(lists);
-		}
-	};
 
 	const setData = (data) => {
 		setSearchData(data);
@@ -72,15 +81,6 @@ const App = () => {
 
 	const setInput = (input) => {
 		setSearchInput(input);
-	};
-
-	const setGamesList = (games) => {
-		if (window.localStorage && window.localStorage.getItem('games')) {
-			window.localStorage.setItem('games', JSON.stringify(games));
-			setGames(JSON.parse(window.localStorage.getItem('games')));
-		} else {
-			setGames(games);
-		}
 	};
 
 	const setSidebarVisibility = () => {

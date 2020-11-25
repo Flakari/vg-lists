@@ -14,8 +14,7 @@ const Consoles = (props) => {
         setShowWholeList(!showWholeList);
     };
 
-    const onClickHandler = (index) => {
-        console.log(props.consoles);
+    const addRemoveConsole = (index) => {
         const tempGames = JSON.parse(JSON.stringify(props.games));
         if (!hasStoredData) {
             const tempConsoles = [...props.consoles].map((item, i) => {
@@ -32,28 +31,23 @@ const Consoles = (props) => {
         }
     };
 
+    const mapConsolesList = (item, index) => {
+        const platform = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
+        return (
+            <li
+                className={hasStoredData && item.owned ? 'owned' : null}
+                onClick={() => addRemoveConsole(index)}
+                key={platform}
+            >{platform}</li>
+        );
+    }
+
     return (
         <div>
             <ul className="consoles-list">
-                {props.consoles === null ? null : (!needShortenedList || (needShortenedList && showWholeList)) ? props.consoles.map((item, index) => {
-                    const platform = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
-                    return (
-                        <li
-                            className={hasStoredData && item.owned ? 'owned' : null}
-                            onClick={() => onClickHandler(index)}
-                            key={platform}
-                        >{platform}</li>
-                    );
-                }) : [...props.consoles].splice(0, 5).map((item, index) => {
-                    const platform = !item.hasOwnProperty('platform') ? item.name : item.platform.name;
-                    return (
-                        <li
-                            className={hasStoredData && item.owned ? 'owned' : null}
-                            onClick={() => onClickHandler(index)}
-                            key={platform}
-                        >{platform}</li>
-                    );
-                })}
+                {props.consoles === null ? null :
+                    (!needShortenedList || (needShortenedList && showWholeList)) ? props.consoles.map(mapConsolesList) :
+                        [...props.consoles].splice(0, 5).map(mapConsolesList)}
                 {!needShortenedList[0] ? null : <li onClick={changeListVisiblity}>{!showWholeList ? '+' : '-'}</li>}
             </ul>
         </div>
