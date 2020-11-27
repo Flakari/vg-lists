@@ -20,12 +20,12 @@ const checkLocalStorage = (storageName, noItem = false) => {
 		noItem ? window.localStorage && !window.localStorage.getItem(storageName) :
 			window.localStorage && window.localStorage.getItem(storageName)
 	);
-}
+};
 
 const initializeLocalStorageState = (storageName, defaultValue) => {
 	return checkLocalStorage(storageName) ?
 		JSON.parse(window.localStorage.getItem(storageName)) : defaultValue;
-}
+};
 
 const App = () => {
 	const [currentPage, setCurrentPage] = useState(String(document.URL.match(/[^/]+(?=\/$|$)/)));
@@ -57,11 +57,11 @@ const App = () => {
 		} else {
 			setState(value);
 		}
-	}
+	};
 
 	const showListImages = (value) => {
 		setLocalStorageData(value, 'showImages', setShowImages);
-	}
+	};
 
 	const setListData = (value) => {
 		setLocalStorageData(value, 'lists', setLists);
@@ -69,18 +69,6 @@ const App = () => {
 
 	const setGamesList = (value) => {
 		setLocalStorageData(value, 'games', setGames);
-	};
-
-	const changeHighlight = (value) => {
-		setCurrentPage(value);
-	}
-
-	const setData = (data) => {
-		setSearchData(data);
-	};
-
-	const setInput = (input) => {
-		setSearchInput(input);
 	};
 
 	const setSidebarVisibility = () => {
@@ -275,7 +263,7 @@ const App = () => {
 	return (
 		<div className="App">
 			<Router basename='/vg-lists'>
-				<Header setData={setData} setSidebar={setSidebarVisibility} />
+				<Header setData={setSearchData} setSidebar={setSidebarVisibility} />
 				<Sidebar
 					lists={lists}
 					add={addNewList}
@@ -287,14 +275,14 @@ const App = () => {
 					hide={hideSidebar}
 					moveList={moveList}
 					currentPage={currentPage}
-					changeHighlight={changeHighlight}
+					changeHighlight={setCurrentPage}
 					showImages={showImages}
 					setShowImages={showListImages}
 				/>
 				<div id="main-container">
 					<Switch>
 						<Route exact path="/">
-							<Home lists={lists} changeHighlight={changeHighlight} />
+							<Home lists={lists} changeHighlight={setCurrentPage} />
 						</Route>
 						<Route path="/search">
 							<SearchResults
@@ -302,12 +290,12 @@ const App = () => {
 								games={games}
 								add={addGameToList}
 								data={searchData}
-								setData={setData}
+								setData={setSearchData}
 								searchInput={searchInput}
-								setInput={setInput}
+								setInput={setSearchInput}
 								setGames={setGamesList}
 								addGameInfo={addGameInformation}
-								changeHighlight={changeHighlight}
+								changeHighlight={setCurrentPage}
 								showImages={showImages}
 							/>
 						</Route>

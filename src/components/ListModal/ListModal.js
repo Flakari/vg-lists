@@ -10,10 +10,6 @@ const ListModal = (props) => {
     const [showDelete, setShowDelete] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(0);
 
-    const changeDeleteIndex = (index) => {
-        setDeleteIndex(index);
-    };
-
     const showDeleteConfirmation = () => {
         setShowDelete(true);
     };
@@ -24,7 +20,7 @@ const ListModal = (props) => {
 
     const deleteItem = (index) => {
         if (String(document.URL.match(/[^/]+(?=\/$|$)/)) === props.lists[index].linkRoute) {
-		    props.history.push('/');
+            props.history.push('/');
         }
         props.delete(index);
         hideDeleteConfirmation();
@@ -49,7 +45,7 @@ const ListModal = (props) => {
                             index={item.index}
                             contents={item.contents}
                             moveList={props.moveList}
-                            deleteIndex={changeDeleteIndex}
+                            deleteIndex={setDeleteIndex}
                             showDelete={showDeleteConfirmation}
                             copy={props.copy}
                             merge={props.merge}
@@ -63,12 +59,12 @@ const ListModal = (props) => {
                 <Modal modalClass={'delete-list'} showModal={showDelete} hideModal={hideDeleteConfirmation}>
                     <ConfirmationModal
                         message='Are you sure you want to delete this list?'
-                        func={deleteItem} 
+                        func={deleteItem}
                         funcArgs={deleteIndex}
                         hide={hideDeleteConfirmation}
                     />
                 </Modal>
-            ) : null} 
+            ) : null}
         </>
     );
 };

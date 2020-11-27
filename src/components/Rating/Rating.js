@@ -17,8 +17,7 @@ const Rating = (props) => {
                 return props.games[props.name].rating;
             }
         });
-    }, [props.games, props.name])
-    
+    }, [props.games, props.name]);
 
     const clickHandler = (number) => {
         if (!props.games.hasOwnProperty(props.name)) {
@@ -38,24 +37,24 @@ const Rating = (props) => {
     return (
         <div className="overall-rating-container">
             <div className='rating-container'>
-            {[0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].map(item => {
-                return (
-                    <div
-                        key={item}
-                        className={item % 1 === 0 ? 'full' : 'half'}
-                        onMouseEnter={() => setHoverValue(item)}
-                        onMouseLeave={() => setHoverValue(gameRating)}
-                        onClick={() => clickHandler(item)}
-                    >
+                {[0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].map(item => {
+                    return (
                         <div
-                            className={`rating ${hoverValue >= item && 'rating-hover'}`}
-                        ></div>
-                    </div>
-                );
-            })}
+                            key={item}
+                            className={item % 1 === 0 ? 'full' : 'half'}
+                            onMouseEnter={() => setHoverValue(item)}
+                            onMouseLeave={() => setHoverValue(gameRating)}
+                            onClick={() => clickHandler(item)}
+                        >
+                            <div
+                                className={`rating ${hoverValue >= item && 'rating-hover'}`}
+                            ></div>
+                        </div>
+                    );
+                })}
             </div>
             <br />
-            <button onClick={() => {clickHandler(0)}}><img src={require('../../images/Delete_icon_rating.svg')} alt="Remove Rating" /></button>
+            <button onClick={() => { clickHandler(0) }}><img src={require('../../images/Delete_icon_rating.svg')} alt="Remove Rating" /></button>
         </div>
     );
 };
