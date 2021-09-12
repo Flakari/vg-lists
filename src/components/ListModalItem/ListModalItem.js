@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from '../Modal/Modal';
-import ConfirmationModal from '../ConfirmationModal/ConfirmationModal'; 
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import { withRouter } from 'react-router-dom';
 import TextInput from '../TextInput/TextInput';
 
@@ -12,7 +12,7 @@ const ListModalItem = (props) => {
 
     const renameList = (name, index) => {
         if (String(document.URL.match(/[^/]+(?=\/$|$)/)) === props.lists[index].linkRoute) {
-		    props.history.push('/');
+            props.history.push('/');
         }
         props.rename(name, index);
     }
@@ -59,14 +59,14 @@ const ListModalItem = (props) => {
                 <h2>{props.name}</h2>
                 <div className="list-button-container">
                     <button onClick={() => { props.deleteIndex(props.index); props.showDelete(); }}>Delete List</button>
-                    <button onClick={() => props.moveList('up', props.index)}>Move Up</button>
-                    <button onClick={() => props.moveList('down', props.index)}>Move Down</button>
                     <TextInput
                         id='list-copy-input'
                         text='Copy List'
                         inputFunction={props.copy}
                         args={props.contents}
                     />
+                    <button onClick={() => props.moveList('up', props.index)}>Move Up</button>
+                    <button onClick={() => props.moveList('down', props.index)}>Move Down</button>
                     <TextInput
                         id='list-rename-input'
                         text='Rename List'
@@ -83,7 +83,7 @@ const ListModalItem = (props) => {
             <Modal modalClass={'merge-list'} showModal={showMerge} hideModal={hideMergeConfirmation}>
                 <ConfirmationModal
                     message={`Are you sure you want to merge ${props.name} into ${mergeSelection}?`}
-                    func={props.merge} 
+                    func={props.merge}
                     funcArgs={[props.index, mergeSelection]}
                     hide={hideMergeConfirmation}
                 />

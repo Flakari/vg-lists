@@ -5,7 +5,7 @@ const Searchbar = (props) => {
 	const [input, setInput] = useState('');
 
 	const searchSubmitHandler = () => {
-		fetch(`https://api.rawg.io/api/games?search=${input.split(' ').join('-')}`, {
+		fetch(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_AUTH_TOKEN}&search=${input.split(' ').join('-')}`, {
 			"method": "GET",
 			"headers": {
 				"User-Agent": "https://github.com/Flakari/vg-lists/"
