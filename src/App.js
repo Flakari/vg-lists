@@ -42,7 +42,7 @@ const App = () => {
 		}
 
 		if (checkLocalStorage('games', true)) {
-			window.localStorage.setItem('games', JSON.stringify([]));
+			window.localStorage.setItem('games', JSON.stringify({}));
 		}
 
 		if (checkLocalStorage('showImages', true)) {
